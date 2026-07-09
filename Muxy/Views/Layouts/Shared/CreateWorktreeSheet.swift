@@ -40,11 +40,11 @@ struct CreateWorktreeSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: UIMetrics.scaled(14)) {
-            Text("New Worktree")
+            Text("New Worktree".localized)
                 .font(.system(size: UIMetrics.fontHeadline, weight: .semibold))
 
             VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-                Text("Name").font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
+                Text("Name".localized).font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
                 TextField("feature-x", text: $name)
                     .textFieldStyle(.roundedBorder)
             }
@@ -56,7 +56,7 @@ struct CreateWorktreeSheet: View {
 
             if createNewBranch {
                 VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-                    Text("Branch Name").font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
+                    Text("Branch Name".localized).font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
                     TextField("feature-x", text: $branchName)
                         .textFieldStyle(.roundedBorder)
                         .onChange(of: branchName) { _, newValue in
@@ -64,7 +64,7 @@ struct CreateWorktreeSheet: View {
                         }
                 }
                 VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-                    Text("Base Branch").font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
+                    Text("Base Branch".localized).font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
                     Picker("", selection: $selectedBaseBranch) {
                         ForEach(availableBranches, id: \.self) { branch in
                             Text(branch).tag(branch)
@@ -75,7 +75,7 @@ struct CreateWorktreeSheet: View {
                 }
             } else {
                 VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-                    Text("Branch").font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
+                    Text("Branch".localized).font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
                     Picker("", selection: $selectedExistingBranch) {
                         ForEach(availableBranches, id: \.self) { branch in
                             Text(branch).tag(branch)
@@ -102,9 +102,9 @@ struct CreateWorktreeSheet: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { onFinish(.cancelled) }
+                Button("Cancel".localized) { onFinish(.cancelled) }
                     .keyboardShortcut(.cancelAction)
-                Button("Create") { Task { await create() } }
+                Button("Create".localized) { Task { await create() } }
                     .keyboardShortcut(.defaultAction)
                     .disabled(!canCreate || inProgress)
             }
@@ -129,7 +129,7 @@ struct CreateWorktreeSheet: View {
 
     private var locationSection: some View {
         VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-            Text("Location").font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
+            Text("Location".localized).font(.system(size: UIMetrics.fontFootnote)).foregroundStyle(MuxyTheme.fgMuted)
             if project.isRemote {
                 remoteLocationField
             } else {
@@ -159,12 +159,12 @@ struct CreateWorktreeSheet: View {
                 .padding(.vertical, UIMetrics.spacing3)
                 .background(MuxyTheme.surface, in: RoundedRectangle(cornerRadius: UIMetrics.radiusSM))
 
-            Button("Choose Folder...") {
+            Button("Choose Folder...".localized) {
                 chooseParentDirectory()
             }
             .fixedSize(horizontal: true, vertical: false)
 
-            Button("Use Default") {
+            Button("Use Default".localized) {
                 selectedParentPath = nil
                 usesProjectLocation = false
             }
@@ -179,11 +179,11 @@ struct CreateWorktreeSheet: View {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: UIMetrics.fontCaption))
                     .foregroundStyle(MuxyTheme.diffRemoveFg)
-                Text("Setup commands from .muxy/worktree.json")
+                Text("Setup commands from .muxy/worktree.json".localized)
                     .font(.system(size: UIMetrics.fontFootnote, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
             }
-            Text("These commands will run in the new worktree's terminal. Only enable this if you trust this repository.")
+            Text("These commands will run in the new worktree's terminal. Only enable this if you trust this repository.".localized)
                 .font(.system(size: UIMetrics.fontCaption))
                 .foregroundStyle(MuxyTheme.fgMuted)
                 .fixedSize(horizontal: false, vertical: true)
@@ -198,7 +198,7 @@ struct CreateWorktreeSheet: View {
             }
             .padding(UIMetrics.spacing4)
             .background(MuxyTheme.surface, in: RoundedRectangle(cornerRadius: UIMetrics.radiusSM))
-            Toggle("Run these commands after creating the worktree", isOn: $runSetup)
+            Toggle("Run these commands after creating the worktree".localized, isOn: $runSetup)
                 .font(.system(size: UIMetrics.fontFootnote))
         }
         .padding(UIMetrics.spacing5)
@@ -211,11 +211,11 @@ struct CreateWorktreeSheet: View {
                 Image(systemName: "info.circle")
                     .font(.system(size: UIMetrics.fontCaption))
                     .foregroundStyle(MuxyTheme.fgDim)
-                Text("Optional setup commands")
+                Text("Optional setup commands".localized)
                     .font(.system(size: UIMetrics.fontFootnote, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
             }
-            Text("To run setup commands after creating a worktree, add .muxy/worktree.json in this repository.")
+            Text("To run setup commands after creating a worktree, add .muxy/worktree.json in this repository.".localized)
                 .font(.system(size: UIMetrics.fontCaption))
                 .foregroundStyle(MuxyTheme.fgMuted)
                 .fixedSize(horizontal: false, vertical: true)

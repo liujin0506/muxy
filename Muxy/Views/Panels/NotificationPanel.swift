@@ -57,14 +57,14 @@ struct NotificationPanel: View {
 
     private var header: some View {
         HStack {
-            Text("Notifications")
+            Text("Notifications".localized)
                 .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
             Spacer()
             Button {
                 NotificationStore.shared.clear()
             } label: {
-                Text("Clear All")
+                Text("Clear All".localized)
                     .font(.system(size: UIMetrics.fontFootnote))
                     .foregroundStyle(MuxyTheme.fgMuted)
             }
@@ -96,7 +96,7 @@ struct NotificationPanel: View {
     private var emptyState: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Notifications")
+                Text("Notifications".localized)
                     .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
                 Spacer()
@@ -111,7 +111,7 @@ struct NotificationPanel: View {
                 Image(systemName: "bell.slash")
                     .font(.system(size: UIMetrics.fontHero, weight: .light))
                     .foregroundStyle(MuxyTheme.fgMuted)
-                Text("No notifications")
+                Text("No notifications".localized)
                     .font(.system(size: UIMetrics.fontBody, weight: .medium))
                     .foregroundStyle(MuxyTheme.fgMuted)
                 Spacer()
@@ -201,6 +201,6 @@ private struct NotificationRow: View {
                 .background(MuxyTheme.surface, in: Circle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Dismiss Notification")
+        .accessibilityLabel("Dismiss Notification".localized)
     }
 }

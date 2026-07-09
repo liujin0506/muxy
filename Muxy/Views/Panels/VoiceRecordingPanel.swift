@@ -35,7 +35,7 @@ struct VoiceRecordingPanel: View {
         ))
         .onAppear { pulse = true }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Voice recording")
+        .accessibilityLabel("Voice recording".localized)
     }
 
     private var mainPanel: some View {
@@ -83,7 +83,7 @@ struct VoiceRecordingPanel: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
         } else {
-            Text("Listening...")
+            Text("Listening...".localized)
                 .font(.system(size: UIMetrics.fontFootnote))
                 .foregroundStyle(MuxyTheme.fgDim)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -157,7 +157,7 @@ struct VoiceRecordingPanel: View {
     }
 
     private var errorActions: some View {
-        Button("Close") {
+        Button("Close".localized) {
             state.cancel()
         }
         .buttonStyle(.plain)

@@ -15,7 +15,7 @@ struct RichInputSettingsView: View {
 
             HStack {
                 Spacer()
-                Button("Reset to Defaults") {
+                Button("Reset to Defaults".localized) {
                     settings.resetToDefaults()
                 }
                 .font(.system(size: SettingsMetrics.footnoteFontSize))

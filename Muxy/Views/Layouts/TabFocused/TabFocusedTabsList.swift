@@ -110,14 +110,14 @@ struct TabFocusedTabsList: View {
     private func tabRows(_ tabs: [AreaTab], numbers: [UUID: Int], emptyOnNoTabs: Bool) -> some View {
         if tabs.isEmpty {
             if emptyOnNoTabs {
-                Text("No open tabs")
+                Text("No open tabs".localized)
                     .font(.system(size: UIMetrics.fontBody))
                     .foregroundStyle(MuxyTheme.fgMuted)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, TabFocusedSidebarMetrics.rowHorizontalInset + UIMetrics.spacing4)
                     .padding(.vertical, UIMetrics.spacing3)
             } else {
-                Text("No tabs")
+                Text("No tabs".localized)
                     .font(.system(size: UIMetrics.fontFootnote))
                     .foregroundStyle(MuxyTheme.fgDim)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -449,23 +449,23 @@ private struct TabFocusedTabRow: View {
 
     @ViewBuilder
     private var contextMenu: some View {
-        Button("New Tab to the Left") {
+        Button("New Tab to the Left".localized) {
             appState.dispatch(.createTabAdjacent(projectID: projectID, areaID: area.id, tabID: tab.id, side: .left))
         }
-        Button("New Tab to the Right") {
+        Button("New Tab to the Right".localized) {
             appState.dispatch(.createTabAdjacent(projectID: projectID, areaID: area.id, tabID: tab.id, side: .right))
         }
         Divider()
-        Button("Rename Tab") { startRename() }
+        Button("Rename Tab".localized) { startRename() }
         if tab.customTitle != nil {
-            Button("Reset Title") {
+            Button("Reset Title".localized) {
                 area.setCustomTitle(tab.id, title: nil)
                 appState.saveWorkspaces()
             }
         }
-        Button("Set Tab Color…") { showColorPicker = true }
+        Button("Set Tab Color…".localized) { showColorPicker = true }
         if tab.colorID != nil {
-            Button("Reset Tab Color") {
+            Button("Reset Tab Color".localized) {
                 area.setColorID(tab.id, colorID: nil)
                 appState.saveWorkspaces()
             }
@@ -475,13 +475,13 @@ private struct TabFocusedTabRow: View {
         if !tab.isPinned || hasClosableSiblings {
             Divider()
             if !tab.isPinned {
-                Button("Close Tab") { close() }
+                Button("Close Tab".localized) { close() }
             }
-            Button("Close Other Tabs") { closeOthers() }
+            Button("Close Other Tabs".localized) { closeOthers() }
                 .disabled(closableOthersCount == 0)
-            Button("Close Tabs to the Left") { closeLeft() }
+            Button("Close Tabs to the Left".localized) { closeLeft() }
                 .disabled(closableLeftCount == 0)
-            Button("Close Tabs to the Right") { closeRight() }
+            Button("Close Tabs to the Right".localized) { closeRight() }
                 .disabled(closableRightCount == 0)
         }
     }
@@ -497,7 +497,7 @@ private struct TabFocusedTabRow: View {
                     .font(.system(size: UIMetrics.fontCaption, weight: .bold))
                     .foregroundStyle(MuxyTheme.fgDim)
                     .onTapGesture { close() }
-                    .accessibilityLabel("Close Tab")
+                    .accessibilityLabel("Close Tab".localized)
                     .accessibilityAddTraits(.isButton)
             }
         }
@@ -516,7 +516,7 @@ private struct TabFocusedTabRow: View {
         } else if isIdle, !active {
             Image(systemName: "moon.zzz")
                 .font(.system(size: UIMetrics.fontFootnote, weight: .medium))
-                .help("Idle — terminal freed to save memory. Reopens when selected.")
+                .help("Idle — terminal freed to save memory. Reopens when selected.".localized)
         } else {
             kindIcon
         }

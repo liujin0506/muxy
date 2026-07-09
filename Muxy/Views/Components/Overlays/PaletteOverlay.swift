@@ -99,7 +99,7 @@ struct PaletteOverlay<Item: Identifiable & Sendable>: View {
             if isLoading || isSearching {
                 ProgressView()
                     .controlSize(.small)
-                    .accessibilityLabel("Searching")
+                    .accessibilityLabel("Searching".localized)
             }
         }
         .padding(.horizontal, UIMetrics.spacing6)

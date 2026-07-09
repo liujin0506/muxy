@@ -50,12 +50,12 @@ struct RemoteDevicesSettingsView: View {
             isPresented: deleteAlertBinding,
             presenting: devicePendingDelete
         ) { device in
-            Button("Delete", role: .destructive) {
+            Button("Delete".localized, role: .destructive) {
                 deleteDevice(device)
                 devicePendingDelete = nil
             }
             .keyboardShortcut(.defaultAction)
-            Button("Cancel", role: .cancel) {
+            Button("Cancel".localized, role: .cancel) {
                 devicePendingDelete = nil
             }
         } message: { device in
@@ -64,7 +64,7 @@ struct RemoteDevicesSettingsView: View {
     }
 
     private var emptyState: some View {
-        Text("No remote devices yet.")
+        Text("No remote devices yet.".localized)
             .font(.system(size: SettingsMetrics.labelFontSize))
             .foregroundStyle(SettingsStyle.mutedForeground)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -79,7 +79,7 @@ struct RemoteDevicesSettingsView: View {
             HStack(spacing: 6) {
                 Image(systemName: "plus")
                     .font(.system(size: 11, weight: .semibold))
-                Text("Add Remote Device")
+                Text("Add Remote Device".localized)
                     .font(.system(size: SettingsMetrics.labelFontSize, weight: .medium))
             }
             .foregroundStyle(SettingsStyle.accent)
@@ -144,7 +144,7 @@ private struct RemoteDeviceRow: View {
                     .foregroundStyle(SettingsStyle.mutedForeground)
             }
             Spacer()
-            Button("Edit", action: onEdit)
+            Button("Edit".localized, action: onEdit)
                 .buttonStyle(.plain)
                 .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .medium))
                 .foregroundStyle(SettingsStyle.accent)

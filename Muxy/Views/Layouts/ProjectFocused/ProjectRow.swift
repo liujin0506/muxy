@@ -99,7 +99,7 @@ struct ProjectRow: View {
             }
             .contextMenu {
                 if project.isHome {
-                    Button("Hide Home") { hideHome() }
+                    Button("Hide Home".localized) { hideHome() }
                 } else {
                     projectContextMenu
                 }
@@ -170,33 +170,33 @@ struct ProjectRow: View {
             }
             Divider()
         }
-        Button("Set Logo...") { pickLogoImage() }
+        Button("Set Logo...".localized) { pickLogoImage() }
         if project.logo != nil {
-            Button("Remove Logo") { onSetLogo(nil) }
+            Button("Remove Logo".localized) { onSetLogo(nil) }
         }
-        Button("Set Icon...") { showSymbolPicker = true }
+        Button("Set Icon...".localized) { showSymbolPicker = true }
         if project.icon != nil {
-            Button("Remove Icon") { onSetIcon(nil) }
+            Button("Remove Icon".localized) { onSetIcon(nil) }
         }
-        Button("Set Icon Color...") { showColorPicker = true }
+        Button("Set Icon Color...".localized) { showColorPicker = true }
         if project.iconColor != nil {
-            Button("Reset Icon Color") { onSetIconColor(nil) }
+            Button("Reset Icon Color".localized) { onSetIconColor(nil) }
         }
         Divider()
-        Button("Rename Project") { startRename() }
+        Button("Rename Project".localized) { startRename() }
         if isGitRepo {
             Divider()
-            Toggle("Worktrees", isOn: worktreesEnabledBinding)
+            Toggle("Worktrees".localized, isOn: worktreesEnabledBinding)
             if project.worktreesEnabled {
-                Button("Refresh Worktrees") { Task { await refreshWorktrees() } }
-                Button("New Worktree…") { showCreateWorktreeSheet = true }
+                Button("Refresh Worktrees".localized) { Task { await refreshWorktrees() } }
+                Button("New Worktree…".localized) { showCreateWorktreeSheet = true }
                 if worktrees.count > 1 {
-                    Button("Switch Worktree…") { showWorktreePopover = true }
+                    Button("Switch Worktree…".localized) { showWorktreePopover = true }
                 }
             }
         } else if isCheckingGitRepo {
             Divider()
-            Button("Loading Worktrees…") {}
+            Button("Loading Worktrees…".localized) {}
                 .disabled(true)
         }
         if !projectGroupStore.groups.isEmpty {
@@ -204,7 +204,7 @@ struct ProjectRow: View {
             ProjectGroupMembershipMenu(project: project)
         }
         Divider()
-        Button("Remove Project", role: .destructive, action: onRemove)
+        Button("Remove Project".localized, role: .destructive, action: onRemove)
     }
 
     private var resolvedLogo: NSImage? {
@@ -402,10 +402,10 @@ private struct RenamePopover: View {
 
     var body: some View {
         VStack(spacing: UIMetrics.spacing4) {
-            Text("Rename Project")
+            Text("Rename Project".localized)
                 .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
-            TextField("Project name", text: $text)
+            TextField("Project name".localized, text: $text)
                 .textFieldStyle(.roundedBorder)
                 .font(.system(size: UIMetrics.fontBody))
                 .focused($isFocused)

@@ -7,9 +7,9 @@ enum ProcessGroup: String, CaseIterable {
 
     var title: String {
         switch self {
-        case .app: "App"
-        case .extensionHost: "Extensions"
-        case .orphan: "Orphans"
+        case .app: "App".localized
+        case .extensionHost: "Extensions".localized
+        case .orphan: "Orphans".localized
         }
     }
 }

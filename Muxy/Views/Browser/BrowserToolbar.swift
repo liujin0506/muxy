@@ -73,7 +73,7 @@ struct BrowserToolbar: View {
 
     private var openInBrowserMenu: some View {
         Menu {
-            Button("Open in Default Browser") { openInDefaultBrowser() }
+            Button("Open in Default Browser".localized) { openInDefaultBrowser() }
             if !installedBrowsers.isEmpty {
                 Divider()
                 ForEach(installedBrowsers) { browser in
@@ -91,7 +91,7 @@ struct BrowserToolbar: View {
         .menuIndicator(.hidden)
         .fixedSize()
         .disabled(state.url == nil)
-        .help("Open in External Browser")
+        .help("Open in External Browser".localized)
         .onAppear {
             if installedBrowsers.isEmpty { installedBrowsers = InstalledBrowsers.all() }
         }
@@ -121,7 +121,7 @@ struct BrowserToolbar: View {
                 }
             }
             Divider()
-            Button("Manage Profiles…") {
+            Button("Manage Profiles…".localized) {
                 SettingsFocusCoordinator.shared.request(.browser)
                 NotificationCenter.default.post(name: .openSettingsModal, object: nil)
             }
@@ -138,7 +138,7 @@ struct BrowserToolbar: View {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .fixedSize()
-        .help("Browser Profile")
+        .help("Browser Profile".localized)
     }
 
     private var currentProfileName: String {

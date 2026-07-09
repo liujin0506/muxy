@@ -103,16 +103,16 @@ struct ProjectPickerOverlay: View {
                     Button {
                         chooseWithFinder()
                     } label: {
-                        Label("Choose in Finder", systemImage: "folder")
+                        Label("Choose in Finder".localized, systemImage: "folder")
                     }
                     Button {
                         editDefaultLocation()
                     } label: {
                         if defaultLocationNeedsFix {
-                            Label("Fix Default Location", systemImage: "exclamationmark.triangle.fill")
+                            Label("Fix Default Location".localized, systemImage: "exclamationmark.triangle.fill")
                                 .foregroundStyle(.orange)
                         } else {
-                            Label("Edit Default Location", systemImage: "gearshape")
+                            Label("Edit Default Location".localized, systemImage: "gearshape")
                         }
                     }
                 } label: {
@@ -162,7 +162,7 @@ struct ProjectPickerOverlay: View {
         VStack {
             Spacer()
             if workflow.session.directoryLoadState.showsMessage {
-                Text("Loading…")
+                Text("Loading…".localized)
                     .font(.system(size: UIMetrics.fontBody))
                     .foregroundStyle(MuxyTheme.fgMuted)
             }

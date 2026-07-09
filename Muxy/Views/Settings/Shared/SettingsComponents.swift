@@ -107,7 +107,7 @@ struct SettingsSection<Content: View>: View {
     var body: some View {
         if SettingsCatalog.sectionMatches(query: searchQuery, category: category, section: title) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(title)
+                Text(title.localized)
                     .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .semibold))
                     .foregroundStyle(SettingsStyle.mutedForeground)
                     .padding(.horizontal, SettingsMetrics.horizontalPadding)
@@ -117,7 +117,7 @@ struct SettingsSection<Content: View>: View {
                 content
 
                 if let footer {
-                    Text(footer)
+                    Text(footer.localized)
                         .font(.system(size: SettingsMetrics.footnoteFontSize))
                         .foregroundStyle(SettingsStyle.mutedForeground)
                         .fixedSize(horizontal: false, vertical: true)
@@ -145,7 +145,7 @@ struct SettingsRow<Content: View>: View {
 
     var body: some View {
         HStack {
-            Text(label)
+            Text(label.localized)
                 .font(.system(size: SettingsMetrics.labelFontSize))
                 .foregroundStyle(SettingsStyle.foreground)
             Spacer()

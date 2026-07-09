@@ -43,7 +43,7 @@ struct ProjectIconColorPicker: View {
                 HStack(spacing: UIMetrics.spacing3) {
                     Image(systemName: "arrow.uturn.backward")
                         .font(.system(size: UIMetrics.fontCaption, weight: .medium))
-                    Text("Reset to Default")
+                    Text("Reset to Default".localized)
                         .font(.system(size: UIMetrics.fontFootnote, weight: .medium))
                 }
                 .foregroundStyle(MuxyTheme.fgMuted)

@@ -24,7 +24,7 @@ struct KeyboardShortcutsSettingsView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(SettingsStyle.mutedForeground)
                     .font(.system(size: SettingsMetrics.labelFontSize))
-                TextField("Search shortcuts", text: $searchText)
+                TextField("Search shortcuts".localized, text: $searchText)
                     .textFieldStyle(.plain)
                     .font(.system(size: SettingsMetrics.labelFontSize))
                     .foregroundStyle(SettingsStyle.foreground)
@@ -33,7 +33,7 @@ struct KeyboardShortcutsSettingsView: View {
             .padding(.vertical, 6)
             .background(SettingsStyle.surface, in: RoundedRectangle(cornerRadius: 6))
 
-            Button("Reset All") {
+            Button("Reset All".localized) {
                 store.resetToDefaults()
                 recordingAction = nil
                 conflictWarning = nil
@@ -258,7 +258,7 @@ private struct ShortcutRow: View {
                 .frame(width: 0, height: 0)
                 .opacity(0)
 
-            Text("Press shortcut…")
+            Text("Press shortcut…".localized)
                 .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .medium))
                 .foregroundStyle(SettingsStyle.warning)
                 .padding(.horizontal, 8)

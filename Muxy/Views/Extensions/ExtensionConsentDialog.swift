@@ -226,7 +226,7 @@ struct ExtensionConsentDialog: View {
                 .font(.system(size: 28, weight: .light))
                 .foregroundStyle(MuxyTheme.accent)
             VStack(alignment: .leading, spacing: 4) {
-                Text("Allow \(request.extensionDisplayName)?")
+                Text("Allow %@?".localized(request.extensionDisplayName))
                     .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
                 Text(verbDescription)
@@ -257,7 +257,7 @@ struct ExtensionConsentDialog: View {
     private var blockToggle: some View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle(isOn: $blockKind) {
-                Text("Block all \(request.verb.kindDisplayName) from this extension")
+                Text("Block all %@ from this extension".localized(request.verb.kindDisplayName))
                     .font(.system(size: UIMetrics.fontCaption))
                     .foregroundStyle(MuxyTheme.fg)
             }
@@ -289,17 +289,17 @@ struct ExtensionConsentDialog: View {
 
     private var buttons: some View {
         HStack(spacing: 8) {
-            Button("Deny & remember") { onChoice(blockKind ? .blockKind : .denyAndRemember) }
+            Button("Deny & remember".localized) { onChoice(blockKind ? .blockKind : .denyAndRemember) }
                 .buttonStyle(.bordered)
                 .tint(blockKind ? MuxyTheme.diffRemoveFg : nil)
             Spacer()
-            Button("Cancel") { onChoice(.denyOnce) }
+            Button("Cancel".localized) { onChoice(.denyOnce) }
                 .keyboardShortcut(.escape, modifiers: [])
                 .buttonStyle(.bordered)
-            Button("Allow") { onChoice(.allowOnce) }
+            Button("Allow".localized) { onChoice(.allowOnce) }
                 .buttonStyle(.bordered)
                 .disabled(blockKind)
-            Button("Allow & remember") { onChoice(.allowAndRemember) }
+            Button("Allow & remember".localized) { onChoice(.allowAndRemember) }
                 .keyboardShortcut(.return, modifiers: [])
                 .buttonStyle(.borderedProminent)
                 .disabled(blockKind)

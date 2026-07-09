@@ -145,6 +145,15 @@ enum SettingsCatalog {
 
     static let items: [SettingsCatalogItem] = [
         SettingsCatalogItem(
+            key: AppLanguagePreference.storageKey,
+            title: "Display Language",
+            description: "Sets the language Muxy's interface is displayed in.",
+            category: .general,
+            section: "Language",
+            defaultValue: AppLanguage.system.rawValue,
+            aliases: ["language", "locale", "translation", "localization", "i18n", "chinese", "中文", "语言", "简体中文"]
+        ),
+        SettingsCatalogItem(
             key: UpdateChannel.storageKey,
             title: "Update Channel",
             description: "Controls whether Muxy receives stable releases or beta builds.",

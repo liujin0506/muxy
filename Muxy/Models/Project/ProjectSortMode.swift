@@ -11,11 +11,11 @@ enum ProjectSortMode: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .manual: "Manual"
-        case .nameAscending: "Name (A–Z)"
-        case .nameDescending: "Name (Z–A)"
-        case .recentlyActive: "Recently Active"
-        case .dateCreated: "Date Added"
+        case .manual: "Manual".localized
+        case .nameAscending: "Name (A–Z)".localized
+        case .nameDescending: "Name (Z–A)".localized
+        case .recentlyActive: "Recently Active".localized
+        case .dateCreated: "Date Added".localized
         }
     }
 

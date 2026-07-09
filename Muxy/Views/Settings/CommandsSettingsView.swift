@@ -26,7 +26,7 @@ struct CommandsSettingsView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(SettingsStyle.mutedForeground)
                     .font(.system(size: SettingsMetrics.labelFontSize))
-                TextField("Search commands", text: $searchText)
+                TextField("Search commands".localized, text: $searchText)
                     .textFieldStyle(.plain)
                     .font(.system(size: SettingsMetrics.labelFontSize))
                     .foregroundStyle(SettingsStyle.foreground)
@@ -47,7 +47,7 @@ struct CommandsSettingsView: View {
                     .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .semibold))
             }
             .buttonStyle(.plain)
-            .help("Add Command")
+            .help("Add Command".localized)
             .accessibilityLabel("Add Command")
         }
         .padding(SettingsMetrics.horizontalPadding)
@@ -61,7 +61,7 @@ struct CommandsSettingsView: View {
 
     private var commandShortcutsSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Press the command layer shortcut, then a command key to open a new terminal tab.")
+            Text("Press the command layer shortcut, then a command key to open a new terminal tab.".localized)
                 .font(.system(size: SettingsMetrics.footnoteFontSize))
                 .foregroundStyle(SettingsStyle.mutedForeground)
                 .fixedSize(horizontal: false, vertical: true)
@@ -245,7 +245,7 @@ private struct CommandPrefixRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("Command Layer")
+                Text("Command Layer".localized)
                     .font(.system(size: SettingsMetrics.labelFontSize))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -298,7 +298,7 @@ private struct CommandPrefixRow: View {
                 .frame(width: 0, height: 0)
                 .opacity(0)
 
-            Text("Press shortcut…")
+            Text("Press shortcut…".localized)
                 .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .medium))
                 .foregroundStyle(SettingsStyle.warning)
                 .padding(.horizontal, 8)
@@ -328,11 +328,11 @@ private struct CommandShortcutRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 8) {
-                TextField("Name", text: $shortcut.name)
+                TextField("Name".localized, text: $shortcut.name)
                     .font(.system(size: SettingsMetrics.labelFontSize))
                     .settingsTextInput(width: 120)
 
-                TextField("Command", text: $shortcut.command)
+                TextField("Command".localized, text: $shortcut.command)
                     .font(.system(size: SettingsMetrics.labelFontSize, design: .monospaced))
                     .settingsTextInput(maxWidth: .infinity)
 
@@ -394,7 +394,7 @@ private struct CommandShortcutRow: View {
                 .frame(width: 0, height: 0)
                 .opacity(0)
 
-            Text("Press key…")
+            Text("Press key…".localized)
                 .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .medium))
                 .foregroundStyle(SettingsStyle.warning)
                 .padding(.horizontal, 8)

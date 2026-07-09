@@ -43,7 +43,7 @@ struct RecordingSettingsView: View {
     private var languagePicker: some View {
         if languages.isEmpty {
             SettingsRow("Language") {
-                Text("None available")
+                Text("None available".localized)
                     .font(.system(size: SettingsMetrics.labelFontSize))
                     .foregroundStyle(SettingsStyle.mutedForeground)
             }

@@ -19,7 +19,7 @@ struct TabFocusedWorkspacePopover: View {
     }
 
     private var items: [Item] {
-        [Item(id: nil, name: "All Projects", group: nil)]
+        [Item(id: nil, name: "All Projects".localized, group: nil)]
             + projectGroupStore.groups.map { Item(id: $0.id, name: $0.name, group: $0) }
     }
 

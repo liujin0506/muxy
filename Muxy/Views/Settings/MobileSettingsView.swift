@@ -61,7 +61,7 @@ struct MobileSettingsView: View {
                             .foregroundStyle(SettingsStyle.destructive)
                             .fixedSize(horizontal: false, vertical: true)
                         if service.isPortInUse {
-                            Button("Free Port") {
+                            Button("Free Port".localized) {
                                 showFreePortConfirmation = true
                             }
                             .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .medium))
@@ -89,7 +89,7 @@ struct MobileSettingsView: View {
                 showsDivider: false
             ) {
                 if devices.devices.isEmpty {
-                    Text("No devices approved yet.")
+                    Text("No devices approved yet.".localized)
                         .font(.system(size: SettingsMetrics.labelFontSize))
                         .foregroundStyle(SettingsStyle.mutedForeground)
                         .padding(.horizontal, SettingsMetrics.horizontalPadding)
@@ -125,10 +125,10 @@ struct MobileSettingsView: View {
             "Free port \(String(service.port))?",
             isPresented: $showFreePortConfirmation
         ) {
-            Button("Free Port", role: .destructive) {
+            Button("Free Port".localized, role: .destructive) {
                 service.freePort()
             }
-            Button("Cancel", role: .cancel) {}
+            Button("Cancel".localized, role: .cancel) {}
         } message: {
             Text("This will terminate any process currently listening on port \(String(service.port)).")
         }
@@ -140,24 +140,24 @@ struct MobileSettingsView: View {
             ),
             presenting: deviceToRevoke
         ) { device in
-            Button("Revoke", role: .destructive) {
+            Button("Revoke".localized, role: .destructive) {
                 devices.revoke(deviceID: device.id)
             }
-            Button("Cancel", role: .cancel) {}
+            Button("Cancel".localized, role: .cancel) {}
         } message: { _ in
-            Text("The device will be disconnected immediately and must request approval again to reconnect.")
+            Text("The device will be disconnected immediately and must request approval again to reconnect.".localized)
         }
         .alert(
             "Revoke \(selectedDeviceIDs.count) \(selectedDeviceIDs.count == 1 ? "device" : "devices")?",
             isPresented: $showBatchRevokeConfirmation
         ) {
-            Button("Revoke", role: .destructive) {
+            Button("Revoke".localized, role: .destructive) {
                 devices.revoke(deviceIDs: selectedDeviceIDs)
                 exitSelection()
             }
-            Button("Cancel", role: .cancel) {}
+            Button("Cancel".localized, role: .cancel) {}
         } message: {
-            Text("The selected devices will be disconnected immediately and must request approval again to reconnect.")
+            Text("The selected devices will be disconnected immediately and must request approval again to reconnect.".localized)
         }
     }
 
@@ -221,7 +221,7 @@ struct MobileSettingsView: View {
             HStack(alignment: .top, spacing: 14) {
                 MobilePairingQRView(uriString: uri, size: 132)
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Open the Muxy mobile app, tap Add device, and scan this code.")
+                    Text("Open the Muxy mobile app, tap Add device, and scan this code.".localized)
                         .font(.system(size: SettingsMetrics.labelFontSize))
                         .fixedSize(horizontal: false, vertical: true)
                     Text(host.host)
@@ -301,7 +301,7 @@ struct MobileSettingsView: View {
 
                 Spacer()
 
-                Button("Done") {
+                Button("Done".localized) {
                     exitSelection()
                 }
                 .buttonStyle(.borderless)
@@ -309,7 +309,7 @@ struct MobileSettingsView: View {
                 .foregroundStyle(MuxyTheme.accent)
             } else {
                 Spacer()
-                Button("Select") {
+                Button("Select".localized) {
                     isSelecting = true
                 }
                 .buttonStyle(.borderless)
@@ -364,7 +364,7 @@ struct MobileSettingsView: View {
             }
             Spacer()
             if !isSelecting {
-                Button("Revoke", role: .destructive) {
+                Button("Revoke".localized, role: .destructive) {
                     deviceToRevoke = device
                 }
                 .buttonStyle(.borderless)

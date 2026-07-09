@@ -103,7 +103,7 @@ struct ExtensionsView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 11, weight: .semibold))
-                        Text("Extensions")
+                        Text("Extensions".localized)
                             .font(.system(size: 12, weight: .medium))
                     }
                     .foregroundStyle(MuxyTheme.fgMuted)
@@ -112,13 +112,13 @@ struct ExtensionsView: View {
                     .background(MuxyTheme.hover, in: RoundedRectangle(cornerRadius: 6))
                 }
                 .buttonStyle(.plain)
-                .help("Back to Extensions")
+                .help("Back to Extensions".localized)
             } else {
                 HStack(spacing: 8) {
                     Image(systemName: "puzzlepiece.extension")
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(MuxyTheme.fgMuted)
-                    Text("Extensions")
+                    Text("Extensions".localized)
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundStyle(MuxyTheme.fg)
                 }
@@ -154,18 +154,18 @@ struct ExtensionsView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(isUpdatingAll)
-                    .help("Update all extensions with available updates")
+                    .help("Update all extensions with available updates".localized)
                 }
                 ExtensionPrimaryButton(title: "Create") { showCreateSheet = true }
-                    .help("Create a new extension")
+                    .help("Create a new extension".localized)
                 ExtensionSecondaryButton(title: "Load Unpacked") { loadUnpacked() }
-                    .help("Load an extension from any folder for development")
+                    .help("Load an extension from any folder for development".localized)
                 ExtensionSecondaryButton(title: "Reload") { store.reload() }
-                    .help("Reload Extensions")
+                    .help("Reload Extensions".localized)
                 ExtensionSecondaryButton(title: "Reveal Folder") {
                     NSWorkspace.shared.activateFileViewerSelecting([store.rootDirectory])
                 }
-                .help("Open extensions folder in Finder")
+                .help("Open extensions folder in Finder".localized)
             }
             Button {
                 NSApp.keyWindow?.close()
@@ -177,7 +177,7 @@ struct ExtensionsView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Close")
+            .help("Close".localized)
         }
         .padding(.horizontal, 16)
         .frame(height: 56)
@@ -317,7 +317,7 @@ private struct ExtensionsListPage: View {
 
     private var developmentBanner: some View {
         HStack(alignment: .top, spacing: 8) {
-            Text("Extensions are under active development. APIs, manifest format, and behavior may change without notice.")
+            Text("Extensions are under active development. APIs, manifest format, and behavior may change without notice.".localized)
                 .font(.system(size: 11))
                 .foregroundStyle(MuxyTheme.fgMuted)
                 .fixedSize(horizontal: false, vertical: true)
@@ -330,10 +330,10 @@ private struct ExtensionsListPage: View {
             Image(systemName: "puzzlepiece.extension")
                 .font(.system(size: 32))
                 .foregroundStyle(MuxyTheme.fgDim)
-            Text("No extensions installed")
+            Text("No extensions installed".localized)
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
-            Text("Drop an extension into the extensions folder to get started.")
+            Text("Drop an extension into the extensions folder to get started.".localized)
                 .font(.system(size: 12))
                 .foregroundStyle(MuxyTheme.fgMuted)
         }
@@ -352,7 +352,7 @@ private struct LoadFailuresBlock: View {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(MuxyTheme.diffRemoveFg)
-                Text("Load Errors")
+                Text("Load Errors".localized)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
             }
@@ -371,12 +371,12 @@ private struct LoadFailuresBlock: View {
                         Button {
                             onRemoveDevPath(devSourcePath)
                         } label: {
-                            Text("Remove")
+                            Text("Remove".localized)
                                 .font(.system(size: 11))
                                 .foregroundStyle(MuxyTheme.diffRemoveFg)
                         }
                         .buttonStyle(.plain)
-                        .help("Stop loading this dev extension. Your folder is left untouched.")
+                        .help("Stop loading this dev extension. Your folder is left untouched.".localized)
                     }
                 }
             }
@@ -490,7 +490,7 @@ private struct ExtensionUpdateButton: View {
         }
         .buttonStyle(.plain)
         .disabled(isUpdating)
-        .help("Update to v\(version)")
+        .help("Update to v%@".localized(version))
     }
 }
 
@@ -515,7 +515,7 @@ private struct ExtensionPermissionSummary: View {
 
     var body: some View {
         if permissions.isEmpty {
-            Text("no permissions")
+            Text("no permissions".localized)
                 .font(.system(size: 10, weight: .medium))
                 .foregroundStyle(MuxyTheme.fgDim)
         } else {
@@ -575,7 +575,7 @@ private struct ExtensionPermissionTagsRow: View {
 
     var body: some View {
         if permissions.isEmpty {
-            Text("no permissions")
+            Text("no permissions".localized)
                 .font(.system(size: 10, weight: .medium))
                 .foregroundStyle(MuxyTheme.fgDim)
         } else {
@@ -766,7 +766,7 @@ private struct ExtensionDetailPage: View {
                 Button {
                     NSWorkspace.shared.activateFileViewerSelecting([ext.directory])
                 } label: {
-                    Text("Reveal in Finder")
+                    Text("Reveal in Finder".localized)
                         .font(.system(size: 11))
                         .foregroundStyle(MuxyTheme.accent)
                 }
@@ -781,22 +781,22 @@ private struct ExtensionDetailPage: View {
                     Button {
                         store.removeDevPath(status.devSourcePath ?? ext.directory.path)
                     } label: {
-                        Text("Remove from Muxy")
+                        Text("Remove from Muxy".localized)
                             .font(.system(size: 11))
                             .foregroundStyle(MuxyTheme.diffRemoveFg)
                     }
                     .buttonStyle(.plain)
-                    .help("Stop loading this dev extension. Your folder is left untouched.")
+                    .help("Stop loading this dev extension. Your folder is left untouched.".localized)
                 } else {
                     Button {
                         showDeleteConfirmation = true
                     } label: {
-                        Text("Delete")
+                        Text("Delete".localized)
                             .font(.system(size: 11))
                             .foregroundStyle(MuxyTheme.diffRemoveFg)
                     }
                     .buttonStyle(.plain)
-                    .help("Delete this extension and its data from Muxy.")
+                    .help("Delete this extension and its data from Muxy.".localized)
                 }
             }
         }
@@ -808,10 +808,10 @@ private struct ExtensionDetailPage: View {
             isPresented: $showDeleteConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Delete", role: .destructive) { performDelete() }
-            Button("Cancel", role: .cancel) {}
+            Button("Delete".localized, role: .destructive) { performDelete() }
+            Button("Cancel".localized, role: .cancel) {}
         } message: {
-            Text("This removes the extension and its settings, permissions, and shortcuts. This cannot be undone.")
+            Text("This removes the extension and its settings, permissions, and shortcuts. This cannot be undone.".localized)
         }
     }
 
@@ -820,7 +820,7 @@ private struct ExtensionDetailPage: View {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(MuxyTheme.diffRemoveFg)
-                Text("Runtime Error")
+                Text("Runtime Error".localized)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
             }
@@ -937,14 +937,14 @@ private struct ExtensionDetailPage: View {
         DetailSection(title: "Permission Rules") {
             VStack(alignment: .leading, spacing: 6) {
                 if grantRules.isEmpty {
-                    Text("No saved rules. The extension will prompt the first time it requests exec, send-keys, or read-screen.")
+                    Text("No saved rules. The extension will prompt the first time it requests exec, send-keys, or read-screen.".localized)
                         .font(.system(size: 11))
                         .foregroundStyle(MuxyTheme.fgMuted)
                         .fixedSize(horizontal: false, vertical: true)
                 } else {
                     HStack {
                         Spacer()
-                        Button("Clear All") {
+                        Button("Clear All".localized) {
                             grantStore.removeAll(for: status.id)
                         }
                         .buttonStyle(.plain)
@@ -967,7 +967,7 @@ private struct ExtensionDetailPage: View {
                     Button {
                         NSWorkspace.shared.activateFileViewerSelecting([status.logFileURL])
                     } label: {
-                        Text("Reveal Log")
+                        Text("Reveal Log".localized)
                             .font(.system(size: 11))
                             .foregroundStyle(MuxyTheme.accent)
                     }
@@ -1000,7 +1000,7 @@ private struct ExtensionDetailPage: View {
             VStack(alignment: .leading, spacing: 1) {
                 let lines = ExtensionLogTail.read(url: status.logFileURL, maxLines: 200)
                 if lines.isEmpty {
-                    Text("No log output.")
+                    Text("No log output.".localized)
                         .font(.system(size: 11))
                         .foregroundStyle(MuxyTheme.fgMuted)
                 } else {

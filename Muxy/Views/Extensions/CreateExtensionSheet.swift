@@ -30,7 +30,7 @@ struct CreateExtensionSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("New Extension")
+            Text("New Extension".localized)
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
 
@@ -53,16 +53,16 @@ struct CreateExtensionSheet: View {
             )
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("Description")
+                Text("Description".localized)
                     .font(.system(size: 11))
                     .foregroundStyle(MuxyTheme.fgMuted)
-                TextField("Optional summary", text: $description, axis: .vertical)
+                TextField("Optional summary".localized, text: $description, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .lineLimit(2 ... 4)
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("Location")
+                Text("Location".localized)
                     .font(.system(size: 11))
                     .foregroundStyle(MuxyTheme.fgMuted)
                 HStack(spacing: 8) {
@@ -72,7 +72,7 @@ struct CreateExtensionSheet: View {
                         .lineLimit(1)
                         .truncationMode(.middle)
                     Spacer(minLength: 8)
-                    Button("Choose…") { chooseLocation() }
+                    Button("Choose…".localized) { chooseLocation() }
                         .font(.system(size: 11))
                 }
             }
@@ -86,9 +86,9 @@ struct CreateExtensionSheet: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { onFinish() }
+                Button("Cancel".localized) { onFinish() }
                     .keyboardShortcut(.cancelAction)
-                Button("Create") { create() }
+                Button("Create".localized) { create() }
                     .keyboardShortcut(.defaultAction)
                     .disabled(!canCreate)
             }

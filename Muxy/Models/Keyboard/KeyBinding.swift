@@ -244,8 +244,8 @@ enum ShortcutAction: String, Codable, CaseIterable, Identifiable {
         }
     }
 
-    var displayName: String { metadata.displayName }
-    var category: String { metadata.category }
+    var displayName: String { metadata.displayName.localized }
+    var category: String { metadata.category.localized }
     var scope: ShortcutScope { metadata.scope }
 
     static var categories: [String] {

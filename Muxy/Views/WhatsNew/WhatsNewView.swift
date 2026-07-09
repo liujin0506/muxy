@@ -36,7 +36,7 @@ struct WhatsNewView: View {
                 .font(.system(size: 13, weight: .medium))
                 .foregroundStyle(SettingsStyle.accent)
 
-            Text("What's New")
+            Text("What's New".localized)
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundStyle(SettingsStyle.foreground)
 
@@ -49,12 +49,12 @@ struct WhatsNewView: View {
             Button {
                 NSWorkspace.shared.open(releaseURL)
             } label: {
-                Text("View on GitHub")
+                Text("View on GitHub".localized)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(SettingsStyle.accent)
             }
             .buttonStyle(.plain)
-            .help("Open this release on GitHub")
+            .help("Open this release on GitHub".localized)
 
             Button {
                 NSApp.keyWindow?.close()
@@ -66,7 +66,7 @@ struct WhatsNewView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Close")
+            .help("Close".localized)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -82,10 +82,10 @@ struct WhatsNewView: View {
         case .failed:
             centered {
                 VStack(spacing: 12) {
-                    Text("Couldn't load the release notes.")
+                    Text("Couldn't load the release notes.".localized)
                         .font(.system(size: 12))
                         .foregroundStyle(SettingsStyle.mutedForeground)
-                    Button("Retry") { Task { await reload() } }
+                    Button("Retry".localized) { Task { await reload() } }
                 }
             }
         case .loaded:

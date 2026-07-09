@@ -31,7 +31,7 @@ struct SidebarFooter: View {
     }
 
     private var sidebarToggleLabel: String {
-        sidebarExpanded ? "Collapse Sidebar" : "Expand Sidebar"
+        sidebarExpanded ? "Collapse Sidebar".localized : "Expand Sidebar".localized
     }
 
     private var notificationBellIcon: String {
@@ -81,7 +81,7 @@ struct SidebarFooter: View {
 
     private var notificationsButton: some View {
         IconButton(symbol: notificationBellIcon, accessibilityLabel: "Notifications") { showNotifications.toggle() }
-            .help("Notifications")
+            .help("Notifications".localized)
             .popover(isPresented: $showNotifications) {
                 NotificationPanel(onDismiss: { showNotifications = false })
             }
@@ -98,7 +98,7 @@ struct SidebarFooter: View {
 
     private var themeButton: some View {
         IconButton(symbol: "paintpalette", accessibilityLabel: "Theme Picker") { showThemePicker.toggle() }
-            .help("Theme Picker (\(KeyBindingStore.shared.combo(for: .toggleThemePicker).displayString))")
+            .help("\("Theme Picker".localized) (\(KeyBindingStore.shared.combo(for: .toggleThemePicker).displayString))")
             .popover(isPresented: $showThemePicker) { ThemePicker(mode: .sidebar) }
     }
 }

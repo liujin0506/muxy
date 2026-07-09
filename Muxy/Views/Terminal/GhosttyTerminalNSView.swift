@@ -1181,9 +1181,9 @@ final class GhosttyTerminalNSView: NSView {
     }
 
     private func presentContextMenu(with event: NSEvent) {
-        let menu = NSMenu(title: "Terminal")
+        let menu = NSMenu(title: "Terminal".localized)
 
-        let paste = ClosureMenuItem(title: "Paste") { [weak self] in
+        let paste = ClosureMenuItem(title: "Paste".localized) { [weak self] in
             self?.performContextPaste()
         }
         paste.isEnabled = NSPasteboard.general.string(forType: .string).map { !$0.isEmpty } ?? false
@@ -1200,7 +1200,7 @@ final class GhosttyTerminalNSView: NSView {
     }
 
     private func contextSplitMenuItem(title: String, direction: SplitDirection, position: SplitPosition) -> NSMenuItem {
-        ClosureMenuItem(title: title) { [weak self] in
+        ClosureMenuItem(title: title.localized) { [weak self] in
             self?.onSplitRequest?(direction, position)
         }
     }

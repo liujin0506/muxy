@@ -76,7 +76,7 @@ struct ExtensionStorePage: View {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 11))
                 .foregroundStyle(MuxyTheme.fgDim)
-            TextField("Search extensions", text: $query)
+            TextField("Search extensions".localized, text: $query)
                 .textFieldStyle(.plain)
                 .font(.system(size: 12))
             if !query.isEmpty {
@@ -126,9 +126,9 @@ struct ExtensionStorePage: View {
                 selectedCategory = nil
             } label: {
                 if selectedCategory == nil {
-                    Label("All Categories", systemImage: "checkmark")
+                    Label("All Categories".localized, systemImage: "checkmark")
                 } else {
-                    Text("All Categories")
+                    Text("All Categories".localized)
                 }
             }
             Divider()
@@ -202,7 +202,7 @@ struct ExtensionStorePage: View {
     private var loadingState: some View {
         HStack(spacing: 10) {
             ProgressView().controlSize(.small)
-            Text("Loading extensions…")
+            Text("Loading extensions…".localized)
                 .font(.system(size: 12))
                 .foregroundStyle(MuxyTheme.fgMuted)
         }
@@ -214,7 +214,7 @@ struct ExtensionStorePage: View {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 32))
                 .foregroundStyle(MuxyTheme.fgDim)
-            Text("No extensions found")
+            Text("No extensions found".localized)
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
             Text(committedQuery.isEmpty ? "Check back soon for new extensions." : "Try a different search or category.")
@@ -237,7 +237,7 @@ struct ExtensionStorePage: View {
             Button {
                 Task { await reload() }
             } label: {
-                Text("Retry")
+                Text("Retry".localized)
                     .font(.system(size: 12))
                     .foregroundStyle(MuxyTheme.accent)
             }
@@ -389,7 +389,7 @@ private struct ExtensionStoreCard: View {
                     }
                 }
                 if let author = listing.author?.name, !author.isEmpty {
-                    Text("by \(author)")
+                    Text("by %@".localized(author))
                         .font(.system(size: 11))
                         .foregroundStyle(MuxyTheme.fgMuted)
                         .lineLimit(1)
