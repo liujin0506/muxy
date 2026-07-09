@@ -8,8 +8,8 @@ enum AppLayout: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .projectFocused: "Project Focused"
-        case .tabFocused: "Tab Focused"
+        case .projectFocused: "Project Focused".localized
+        case .tabFocused: "Tab Focused".localized
         }
     }
 

@@ -18,8 +18,8 @@ struct ResourceUsageButton: View {
         }
         .buttonStyle(.plain)
         .onHover { hovered = $0 }
-        .help("App & subprocess resource usage")
-        .accessibilityLabel("Resource usage")
+        .help("App & subprocess resource usage".localized)
+        .accessibilityLabel("Resource usage".localized)
         .onAppear { monitor.beginObserving() }
         .onDisappear { monitor.endObserving() }
         .popover(isPresented: $showingPopover, arrowEdge: .bottom) {
@@ -62,7 +62,7 @@ private struct ResourceUsagePopover: View {
             HStack(spacing: UIMetrics.spacing3) {
                 Image(systemName: "eye.slash")
                     .font(.system(size: UIMetrics.fontCaption, weight: .medium))
-                Text("Hide from status bar")
+                Text("Hide from status bar".localized)
                     .font(.system(size: UIMetrics.fontFootnote))
                 Spacer(minLength: 0)
             }
@@ -70,7 +70,7 @@ private struct ResourceUsagePopover: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .help("Hide resource usage. Re-enable it in Settings → Interface.")
+        .help("Hide resource usage. Re-enable it in Settings → Interface.".localized)
     }
 
     private var header: some View {
@@ -78,7 +78,7 @@ private struct ResourceUsagePopover: View {
             Image(systemName: "cpu")
                 .font(.system(size: UIMetrics.fontFootnote, weight: .semibold))
                 .foregroundStyle(MuxyTheme.accent)
-            Text("Resources")
+            Text("Resources".localized)
                 .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
             Spacer(minLength: UIMetrics.spacing6)

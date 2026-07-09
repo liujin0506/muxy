@@ -47,7 +47,7 @@ struct ExtensionInstallPage: View {
     private var loadingState: some View {
         HStack(spacing: 10) {
             ProgressView().controlSize(.small)
-            Text("Loading \(name)…")
+            Text("Loading %@…".localized(name))
                 .font(.system(size: 12))
                 .foregroundStyle(MuxyTheme.fgMuted)
         }
@@ -68,7 +68,7 @@ struct ExtensionInstallPage: View {
             Button {
                 Task { await load() }
             } label: {
-                Text("Retry")
+                Text("Retry".localized)
                     .font(.system(size: 12))
                     .foregroundStyle(MuxyTheme.accent)
             }
@@ -110,7 +110,7 @@ struct ExtensionInstallPage: View {
                         .foregroundStyle(MuxyTheme.fgMuted)
                 }
                 if let author = ext.author?.name, !author.isEmpty {
-                    Text("by \(author)")
+                    Text("by %@".localized(author))
                         .font(.system(size: 12))
                         .foregroundStyle(MuxyTheme.fgMuted)
                 }
@@ -135,7 +135,7 @@ struct ExtensionInstallPage: View {
     private func permissionsBlock(_ ext: MarketplaceExtension) -> some View {
         InstallSection(title: "Permissions") {
             if ext.permissions.isEmpty {
-                Text("This extension requests no permissions.")
+                Text("This extension requests no permissions.".localized)
                     .font(.system(size: 11))
                     .foregroundStyle(MuxyTheme.fgDim)
             } else {
@@ -149,7 +149,7 @@ struct ExtensionInstallPage: View {
             Image(systemName: "lock.shield")
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundStyle(MuxyTheme.accent)
-            Text("No extension can run a command on your computer without you approving each command first.")
+            Text("No extension can run a command on your computer without you approving each command first.".localized)
                 .font(.system(size: 12))
                 .foregroundStyle(MuxyTheme.fg)
                 .fixedSize(horizontal: false, vertical: true)

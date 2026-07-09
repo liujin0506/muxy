@@ -36,7 +36,7 @@ struct ExtensionOutputPanel: View {
                     }
                 }
                 if store.statuses.isEmpty {
-                    Text("No extensions").foregroundStyle(MuxyTheme.fgMuted)
+                    Text("No extensions".localized).foregroundStyle(MuxyTheme.fgMuted)
                 }
             } label: {
                 HStack(spacing: 4) {
@@ -54,14 +54,14 @@ struct ExtensionOutputPanel: View {
             .menuIndicator(.hidden)
             .fixedSize()
             Spacer()
-            Button("Reveal") {
+            Button("Reveal".localized) {
                 if let url = activeLogURL {
                     NSWorkspace.shared.activateFileViewerSelecting([url])
                 }
             }
             .buttonStyle(.plain)
             .foregroundStyle(MuxyTheme.accent)
-            Button("Clear") {
+            Button("Clear".localized) {
                 tailer?.clear()
             }
             .buttonStyle(.plain)
@@ -77,7 +77,7 @@ struct ExtensionOutputPanel: View {
             ScrollView {
                 Group {
                     if lines.isEmpty {
-                        Text("No log output yet.")
+                        Text("No log output yet.".localized)
                             .font(.system(size: UIMetrics.fontFootnote))
                             .foregroundStyle(MuxyTheme.fgMuted)
                             .padding(8)

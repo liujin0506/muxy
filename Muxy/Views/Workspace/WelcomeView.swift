@@ -6,7 +6,7 @@ struct WelcomeView: View {
             WindowDragRepresentable()
                 .frame(height: UIMetrics.scaled(32))
             Spacer()
-            Text("No project selected")
+            Text("No project selected".localized)
                 .font(.system(size: UIMetrics.fontEmphasis))
                 .foregroundStyle(MuxyTheme.fgDim)
             Spacer()

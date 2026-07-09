@@ -89,7 +89,7 @@ struct RichInputSidePanel: View {
     }
 
     private var placeholder: some View {
-        Text("Type something...")
+        Text("Type something...".localized)
             .font(.system(size: clampedFontSize))
             .foregroundStyle(MuxyTheme.fgMuted.opacity(0.6))
             .padding(.horizontal, 12)
@@ -188,7 +188,7 @@ private struct AttachmentChip: View {
                     .foregroundStyle(MuxyTheme.fgMuted)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Remove attachment")
+            .accessibilityLabel("Remove attachment".localized)
         }
         .padding(.horizontal, 7)
         .padding(.vertical, 3)

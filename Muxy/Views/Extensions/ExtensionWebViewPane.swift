@@ -44,9 +44,9 @@ struct ExtensionWebViewPane: View {
         VStack(spacing: 8) {
             Image(systemName: "puzzlepiece.extension")
                 .font(.system(size: 32, weight: .light))
-            Text("Extension \(state.extensionID) is not loaded")
+            Text("Extension %@ is not loaded".localized(state.extensionID))
                 .font(.headline)
-            Text("Tab type: \(state.tabTypeID)")
+            Text("Tab type: %@".localized(state.tabTypeID))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

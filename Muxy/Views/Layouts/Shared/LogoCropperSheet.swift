@@ -26,7 +26,7 @@ struct LogoCropperSheet: View {
 
     var body: some View {
         VStack(spacing: UIMetrics.spacing7) {
-            Text("Crop Logo")
+            Text("Crop Logo".localized)
                 .font(.system(size: UIMetrics.fontHeadline, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
 
@@ -65,10 +65,10 @@ struct LogoCropperSheet: View {
             HStack(spacing: UIMetrics.spacing6) {
                 previewIcon
                 VStack(alignment: .leading, spacing: UIMetrics.spacing1) {
-                    Text("Preview")
+                    Text("Preview".localized)
                         .font(.system(size: UIMetrics.fontFootnote, weight: .medium))
                         .foregroundStyle(MuxyTheme.fgMuted)
-                    Text("Drag to reposition, scroll to zoom")
+                    Text("Drag to reposition, scroll to zoom".localized)
                         .font(.system(size: UIMetrics.fontCaption))
                         .foregroundStyle(MuxyTheme.fgDim)
                 }
@@ -76,10 +76,10 @@ struct LogoCropperSheet: View {
             }
 
             HStack(spacing: UIMetrics.spacing4) {
-                Button("Cancel") { onCancel() }
+                Button("Cancel".localized) { onCancel() }
                     .keyboardShortcut(.cancelAction)
                 Spacer()
-                Button("Apply") { applyCrop() }
+                Button("Apply".localized) { applyCrop() }
                     .keyboardShortcut(.defaultAction)
             }
         }

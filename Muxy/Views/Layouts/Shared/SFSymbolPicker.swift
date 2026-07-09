@@ -221,7 +221,7 @@ struct SFSymbolPicker: View {
                 .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
 
-            TextField("Search symbols...", text: $searchText)
+            TextField("Search symbols...".localized, text: $searchText)
                 .textFieldStyle(.roundedBorder)
                 .font(.system(size: UIMetrics.fontFootnote))
 
@@ -242,7 +242,7 @@ struct SFSymbolPicker: View {
                 HStack(spacing: UIMetrics.spacing3) {
                     Image(systemName: "xmark.circle")
                         .font(.system(size: UIMetrics.fontCaption, weight: .medium))
-                    Text("Remove Icon")
+                    Text("Remove Icon".localized)
                         .font(.system(size: UIMetrics.fontFootnote, weight: .medium))
                 }
                 .foregroundStyle(MuxyTheme.fgMuted)

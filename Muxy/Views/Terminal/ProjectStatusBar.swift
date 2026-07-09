@@ -41,7 +41,7 @@ struct ProjectStatusBar: View {
             alignment: .top
         )
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Status bar")
+        .accessibilityLabel("Status bar".localized)
     }
 
     private var leftSide: some View {
@@ -129,9 +129,9 @@ struct ProjectStatusBar: View {
         .help(fullPath)
         .accessibilityLabel(remote ? "Copy \(fullPath)" : "Reveal \(fullPath) in Finder")
         .contextMenu {
-            Button("Copy Path") { copyToPasteboard(fullPath) }
+            Button("Copy Path".localized) { copyToPasteboard(fullPath) }
             if !remote {
-                Button("Reveal in Finder") { revealInFinder(fullPath) }
+                Button("Reveal in Finder".localized) { revealInFinder(fullPath) }
             }
         }
     }
@@ -191,8 +191,8 @@ struct ProjectStatusBar: View {
                 .foregroundStyle(extensionOutputVisible ? MuxyTheme.accent : MuxyTheme.fgMuted)
         }
         .buttonStyle(.plain)
-        .help("Toggle Extension Output panel")
-        .accessibilityLabel("Toggle Extension Output")
+        .help("Toggle Extension Output panel".localized)
+        .accessibilityLabel("Toggle Extension Output".localized)
     }
 
     private var richInputToggleButton: some View {
@@ -207,8 +207,8 @@ struct ProjectStatusBar: View {
         }
         .buttonStyle(RichInputToolbarButtonStyle())
         .disabled(!isInteractive)
-        .accessibilityLabel("Toggle Rich Input")
-        .help("Toggle Rich Input")
+        .accessibilityLabel("Toggle Rich Input".localized)
+        .help("Toggle Rich Input".localized)
     }
 
     private var voiceRecordingButton: some View {
@@ -223,8 +223,8 @@ struct ProjectStatusBar: View {
         }
         .buttonStyle(RichInputToolbarButtonStyle())
         .disabled(!isInteractive)
-        .accessibilityLabel("Start Voice Recording")
-        .help("Start Voice Recording")
+        .accessibilityLabel("Start Voice Recording".localized)
+        .help("Start Voice Recording".localized)
     }
 
     private var zoomControls: some View {
@@ -235,8 +235,8 @@ struct ProjectStatusBar: View {
             }
             .buttonStyle(RichInputToolbarButtonStyle())
             .disabled(richInputFontSize <= RichInputPreferences.minFontSize)
-            .accessibilityLabel("Decrease editor font size")
-            .help("Decrease font size")
+            .accessibilityLabel("Decrease editor font size".localized)
+            .help("Decrease font size".localized)
 
             Text("\(Int(clampedFontSize))")
                 .font(.system(size: 10, weight: .medium, design: .rounded))
@@ -250,8 +250,8 @@ struct ProjectStatusBar: View {
             }
             .buttonStyle(RichInputToolbarButtonStyle())
             .disabled(richInputFontSize >= RichInputPreferences.maxFontSize)
-            .accessibilityLabel("Increase editor font size")
-            .help("Increase font size")
+            .accessibilityLabel("Increase editor font size".localized)
+            .help("Increase font size".localized)
         }
     }
 

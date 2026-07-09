@@ -105,7 +105,7 @@ struct MainWindow: View {
 
     private var showsBreadcrumb: Bool { layout.topbar == .breadcrumb && !isExtensionSidebarActive }
 
-    var body: some View {
+    private var windowBase: some View {
         HStack(spacing: 0) {
             sidebarColumn
             mainWorkspaceColumn
@@ -193,81 +193,85 @@ struct MainWindow: View {
         .background(WindowConfigurator(configVersion: ghostty.configVersion, uiScalePreset: UIScale.shared.preset))
         .background(WindowTitleUpdater(title: windowTitle))
         .ignoresSafeArea(.container, edges: .top)
-        .onReceive(NotificationCenter.default.publisher(for: .openProjectPicker)) { _ in
-            showProjectPicker = true
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .openRemoteProjectPicker)) { notification in
-            guard let deviceID = notification.userInfo?[OpenRemoteProjectPickerUserInfoKey.deviceID] as? UUID,
-                  let device = remoteDeviceStore.device(id: deviceID)
-            else { return }
-            remoteProjectDevice = device
-            showProjectPicker = true
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .openExtensionDirectoryAsProject)) { notification in
-            guard let path = notification.userInfo?[OpenExtensionDirectoryUserInfoKey.path] as? String else { return }
-            CLIAccessor.openProjectFromPath(
-                path,
-                appState: appState,
-                projectStore: projectStore,
-                worktreeStore: worktreeStore,
-                projectGroupStore: projectGroupStore
-            )
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .terminalOmnibox)) { notification in
-            let launchScope = terminalOmniboxScope(from: notification)
-            if showTerminalOmnibox, launchScope != terminalOmniboxLaunchScope {
+    }
+
+    var body: some View {
+        windowBase
+            .onReceive(NotificationCenter.default.publisher(for: .openProjectPicker)) { _ in
+                showProjectPicker = true
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .openRemoteProjectPicker)) { notification in
+                guard let deviceID = notification.userInfo?[OpenRemoteProjectPickerUserInfoKey.deviceID] as? UUID,
+                      let device = remoteDeviceStore.device(id: deviceID)
+                else { return }
+                remoteProjectDevice = device
+                showProjectPicker = true
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .openExtensionDirectoryAsProject)) { notification in
+                guard let path = notification.userInfo?[OpenExtensionDirectoryUserInfoKey.path] as? String else { return }
+                CLIAccessor.openProjectFromPath(
+                    path,
+                    appState: appState,
+                    projectStore: projectStore,
+                    worktreeStore: worktreeStore,
+                    projectGroupStore: projectGroupStore
+                )
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .terminalOmnibox)) { notification in
+                let launchScope = terminalOmniboxScope(from: notification)
+                if showTerminalOmnibox, launchScope != terminalOmniboxLaunchScope {
+                    terminalOmniboxLaunchScope = launchScope
+                    return
+                }
                 terminalOmniboxLaunchScope = launchScope
-                return
+                showTerminalOmnibox.toggle()
             }
-            terminalOmniboxLaunchScope = launchScope
-            showTerminalOmnibox.toggle()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .toggleSidebar)) { _ in
-            withAnimation(.easeInOut(duration: 0.2)) {
-                sidebarExpanded.toggle()
+            .onReceive(NotificationCenter.default.publisher(for: .toggleSidebar)) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    sidebarExpanded.toggle()
+                }
             }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .toggleAppLayout)) { _ in
-            withAnimation(.easeInOut(duration: 0.2)) {
-                layoutStore.toggle()
+            .onReceive(NotificationCenter.default.publisher(for: .toggleAppLayout)) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    layoutStore.toggle()
+                }
             }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .toggleExtensionConsole)) { _ in
-            panelHost.toggle(BuiltinPanel.extensionConsole, at: .bottom, mode: .floating)
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .windowFullScreenDidChange)) { notification in
-            isFullScreen = notification.userInfo?["isFullScreen"] as? Bool ?? false
-        }
-        .modifier(SidePanelNotificationListeners(
-            onToggleRichInput: { toggleRichInputPanel() },
-            onToggleVoiceRecording: { _ = openVoiceRecorder() }
-        ))
-        .onChange(of: worktreeKeysSignature) {
-            pruneWorktreeStates()
-            pruneVisitedWorktreeKeys()
-        }
-        .onChange(of: activeWorktreeSignature) {
-            updateWorkspaceFileWatcher()
-            recordVisitedActiveWorktree()
-        }
-        .onChange(of: appState.activeProjectID) {
-            activateWorkspaceForActiveProject()
-        }
-        .task {
-            updateWorkspaceFileWatcher()
-            recordVisitedActiveWorktree()
-        }
-        .modifier(TabCloseConfirmationObserver(
-            lastTab: appState.pendingLastTabClose != nil,
-            runningProcess: appState.pendingProcessTabClose != nil,
-            onLastTab: { presentCloseConfirmation(.lastTab) },
-            onRunningProcess: { presentCloseConfirmation(.runningProcess) }
-        ))
-        .onChange(of: appState.pendingLayoutApply != nil) { _, isPresented in
-            guard isPresented, let pending = appState.pendingLayoutApply else { return }
-            presentLayoutApplyConfirmation(pending: pending)
-        }
-        .modifier(SentryConsentPrompter())
+            .onReceive(NotificationCenter.default.publisher(for: .toggleExtensionConsole)) { _ in
+                panelHost.toggle(BuiltinPanel.extensionConsole, at: .bottom, mode: .floating)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .windowFullScreenDidChange)) { notification in
+                isFullScreen = notification.userInfo?["isFullScreen"] as? Bool ?? false
+            }
+            .modifier(SidePanelNotificationListeners(
+                onToggleRichInput: { toggleRichInputPanel() },
+                onToggleVoiceRecording: { _ = openVoiceRecorder() }
+            ))
+            .onChange(of: worktreeKeysSignature) {
+                pruneWorktreeStates()
+                pruneVisitedWorktreeKeys()
+            }
+            .onChange(of: activeWorktreeSignature) {
+                updateWorkspaceFileWatcher()
+                recordVisitedActiveWorktree()
+            }
+            .onChange(of: appState.activeProjectID) {
+                activateWorkspaceForActiveProject()
+            }
+            .task {
+                updateWorkspaceFileWatcher()
+                recordVisitedActiveWorktree()
+            }
+            .modifier(TabCloseConfirmationObserver(
+                lastTab: appState.pendingLastTabClose != nil,
+                runningProcess: appState.pendingProcessTabClose != nil,
+                onLastTab: { presentCloseConfirmation(.lastTab) },
+                onRunningProcess: { presentCloseConfirmation(.runningProcess) }
+            ))
+            .onChange(of: appState.pendingLayoutApply != nil) { _, isPresented in
+                guard isPresented, let pending = appState.pendingLayoutApply else { return }
+                presentLayoutApplyConfirmation(pending: pending)
+            }
+            .modifier(SentryConsentPrompter())
     }
 
     private var sidebarColumn: some View {
@@ -484,7 +488,7 @@ struct MainWindow: View {
             if !isExtensionSidebarActive {
                 NavigationArrowButton(
                     symbol: isTabFocused ? "sidebar.squares.left" : "sidebar.left",
-                    label: isTabFocused ? "Switch to Project Focused Layout" : "Switch to Tab Focused Layout"
+                    label: isTabFocused ? "Switch to Project Focused Layout".localized : "Switch to Tab Focused Layout".localized
                 ) {
                     NotificationCenter.default.post(name: .toggleAppLayout, object: nil)
                 }
@@ -818,7 +822,7 @@ struct MainWindow: View {
         let storedProjects = projectStore.storedProjects
         let allProjects = TerminalOmniboxWorkspaceItem(
             groupID: nil,
-            name: "All Projects",
+            name: "All Projects".localized,
             projectCount: storedProjects.count
         )
         let groups = projectGroupStore.groups.map { group in
@@ -1956,12 +1960,12 @@ private struct WorktreeActionsModifier: ViewModifier {
                 isPresented: alertBinding,
                 presenting: pendingRemoval
             ) { pending in
-                Button("Remove", role: .destructive) {
+                Button("Remove".localized, role: .destructive) {
                     onPerformRemove(pending)
                     pendingRemoval = nil
                 }
                 .keyboardShortcut(.defaultAction)
-                Button("Cancel", role: .cancel) {
+                Button("Cancel".localized, role: .cancel) {
                     pendingRemoval = nil
                 }
                 .keyboardShortcut(.cancelAction)

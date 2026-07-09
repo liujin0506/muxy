@@ -23,7 +23,7 @@ struct WorkspaceSwitcher: View {
     }
 
     private var activeLabel: String {
-        activeGroup?.name ?? "All Projects"
+        activeGroup?.name ?? "All Projects".localized
     }
 
     var body: some View {
@@ -59,16 +59,16 @@ struct WorkspaceSwitcher: View {
             isPresented: deleteAlertBinding,
             presenting: groupPendingDelete
         ) { group in
-            Button("Delete", role: .destructive) {
+            Button("Delete".localized, role: .destructive) {
                 projectGroupStore.removeGroup(id: group.id)
                 groupPendingDelete = nil
             }
             .keyboardShortcut(.defaultAction)
-            Button("Cancel", role: .cancel) {
+            Button("Cancel".localized, role: .cancel) {
                 groupPendingDelete = nil
             }
         } message: { _ in
-            Text("Projects in this workspace will not be deleted.")
+            Text("Projects in this workspace will not be deleted.".localized)
         }
     }
 
@@ -176,7 +176,7 @@ struct WorkspaceSwitcher: View {
                     .font(.system(size: UIMetrics.fontCaption, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fgMuted)
                     .frame(width: UIMetrics.fontBody)
-                Text("All Projects")
+                Text("All Projects".localized)
                     .font(.system(size: UIMetrics.fontBody, weight: .medium))
                     .foregroundStyle(MuxyTheme.fg)
                 Spacer()
@@ -194,13 +194,13 @@ struct WorkspaceSwitcher: View {
                 isShowingPopover = false
                 editorMode = .create
             } label: {
-                Label("Local Workspace", systemImage: "square.stack.3d.up")
+                Label("Local Workspace".localized, systemImage: "square.stack.3d.up")
             }
             Button {
                 isShowingPopover = false
                 remoteEditor = .create
             } label: {
-                Label("Remote (SSH)", systemImage: "network")
+                Label("Remote (SSH)".localized, systemImage: "network")
             }
         } label: {
             HStack(spacing: UIMetrics.spacing2) {
@@ -208,7 +208,7 @@ struct WorkspaceSwitcher: View {
                     .font(.system(size: UIMetrics.fontCaption, weight: .semibold))
                     .foregroundStyle(MuxyTheme.accent)
                     .frame(width: UIMetrics.fontCaption)
-                Text("New Workspace")
+                Text("New Workspace".localized)
                     .font(.system(size: UIMetrics.fontBody, weight: .medium))
                     .foregroundStyle(MuxyTheme.fg)
                 Spacer()
@@ -438,11 +438,11 @@ private struct WorkspaceRow: View {
         .help(connectionHelp)
         .contextMenu {
             if connectionState != nil {
-                Button("Edit Connection", action: onRename)
+                Button("Edit Connection".localized, action: onRename)
             } else {
-                Button("Rename", action: onRename)
+                Button("Rename".localized, action: onRename)
             }
-            Button("Delete", role: .destructive, action: onDelete)
+            Button("Delete".localized, role: .destructive, action: onDelete)
         }
     }
 
@@ -513,7 +513,7 @@ struct RemoteWorkspaceEditorSheet: View {
 
             HStack(spacing: UIMetrics.spacing3) {
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("Cancel".localized, action: onCancel)
                     .keyboardShortcut(.cancelAction)
                 Button(mode.actionLabel, action: submit)
                     .keyboardShortcut(.defaultAction)
@@ -542,20 +542,20 @@ struct RemoteWorkspaceEditorSheet: View {
 
     private var emptyState: some View {
         VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-            Text("Add a remote device to connect this workspace to a server.")
+            Text("Add a remote device to connect this workspace to a server.".localized)
                 .font(.system(size: UIMetrics.fontFootnote))
                 .foregroundStyle(MuxyTheme.fgMuted)
             Button {
                 deviceEditor = .create
             } label: {
-                Label("Add Remote Device", systemImage: "plus")
+                Label("Add Remote Device".localized, systemImage: "plus")
             }
         }
     }
 
     private var devicePicker: some View {
         VStack(alignment: .leading, spacing: UIMetrics.spacing2) {
-            Text("Device")
+            Text("Device".localized)
                 .font(.system(size: UIMetrics.fontFootnote))
                 .foregroundStyle(MuxyTheme.fgMuted)
             HStack(spacing: UIMetrics.spacing3) {
@@ -570,14 +570,14 @@ struct RemoteWorkspaceEditorSheet: View {
                 } label: {
                     Image(systemName: "plus")
                 }
-                .help("Add Remote Device")
+                .help("Add Remote Device".localized)
             }
         }
     }
 
     private var nameField: some View {
         VStack(alignment: .leading, spacing: UIMetrics.spacing2) {
-            Text("Name")
+            Text("Name".localized)
                 .font(.system(size: UIMetrics.fontFootnote))
                 .foregroundStyle(MuxyTheme.fgMuted)
             TextField(selectedDevice?.displayName ?? "Production", text: $name)
@@ -615,10 +615,10 @@ struct WorkspaceEditorSheet: View {
                 .font(.system(size: UIMetrics.fontHeadline, weight: .semibold))
 
             VStack(alignment: .leading, spacing: UIMetrics.spacing3) {
-                Text("Workspace Name")
+                Text("Workspace Name".localized)
                     .font(.system(size: UIMetrics.fontFootnote))
                     .foregroundStyle(MuxyTheme.fgMuted)
-                TextField("Personal", text: $name)
+                TextField("Personal".localized, text: $name)
                     .textFieldStyle(.roundedBorder)
                     .focused($nameFocused)
                     .onSubmit { if canSubmit { onSubmit(trimmed) } }
@@ -626,7 +626,7 @@ struct WorkspaceEditorSheet: View {
 
             HStack {
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("Cancel".localized, action: onCancel)
                     .keyboardShortcut(.cancelAction)
                 Button(mode.actionLabel) { onSubmit(trimmed) }
                     .keyboardShortcut(.defaultAction)

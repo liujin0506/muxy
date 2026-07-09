@@ -76,19 +76,19 @@ struct BackupSettingsView: View {
         action: @escaping () -> Void
     ) -> some View {
         SettingsRow(title) {
-            Button(buttonTitle, action: action)
+            Button(buttonTitle.localized, action: action)
                 .buttonStyle(.plain)
                 .font(.system(size: SettingsMetrics.labelFontSize, weight: .medium))
                 .foregroundStyle(SettingsStyle.accent)
         }
-        .help(description)
+        .help(description.localized)
     }
 
     private func performExport() {
         let panel = NSSavePanel()
         panel.allowedContentTypes = [BackupArchive.contentType]
         panel.nameFieldStringValue = defaultExportName()
-        panel.message = "Choose where to save the Muxy backup"
+        panel.message = "Choose where to save the Muxy backup".localized
         guard panel.runModal() == .OK, let url = panel.url else { return }
 
         errorMessage = nil
@@ -98,7 +98,7 @@ struct BackupSettingsView: View {
         Task {
             do {
                 try await BackupService().export(to: url, appVersion: version, createdAt: Date())
-                ToastState.shared.show(title: "Export complete", body: url.lastPathComponent)
+                ToastState.shared.show(title: "Export complete".localized, body: url.lastPathComponent)
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -113,7 +113,7 @@ struct BackupSettingsView: View {
         panel.allowsMultipleSelection = false
         let delegate = BackupOpenPanelDelegate()
         panel.delegate = delegate
-        panel.message = "Select a Muxy backup to import"
+        panel.message = "Select a Muxy backup to import".localized
         guard panel.runModal() == .OK, let url = panel.url else { return }
 
         errorMessage = nil

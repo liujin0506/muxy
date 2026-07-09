@@ -8,8 +8,8 @@ enum SidebarCollapsedStyle: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .hidden: "Hidden"
-        case .icons: "Icons"
+        case .hidden: "Hidden".localized
+        case .icons: "Icons".localized
         }
     }
 
@@ -32,8 +32,8 @@ enum SidebarExpandedStyle: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .icons: "Icons"
-        case .wide: "Wide"
+        case .icons: "Icons".localized
+        case .wide: "Wide".localized
         }
     }
 

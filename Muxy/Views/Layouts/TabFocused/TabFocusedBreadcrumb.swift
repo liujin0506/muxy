@@ -28,7 +28,7 @@ struct TabFocusedBreadcrumb: View {
     }
 
     private var workspaceName: String {
-        projectGroupStore.activeGroup?.name ?? "All Projects"
+        projectGroupStore.activeGroup?.name ?? "All Projects".localized
     }
 
     private func activeWorktree(for project: Project) -> Worktree? {

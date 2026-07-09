@@ -275,7 +275,7 @@ private struct SettingsSidebar: View {
                     .font(.system(size: 12, weight: .medium))
                     .frame(width: 16)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
+                    Text(title.localized)
                         .font(.system(size: 12, weight: isSelected ? .semibold : .regular))
                         .foregroundStyle(SettingsStyle.foreground)
                         .lineLimit(1)

@@ -118,7 +118,7 @@ struct PaneTabStrip: View {
                     .help(shortcutTooltip("New Tab", for: .newTab))
                 if let onOpenBrowser {
                     IconButton(symbol: "globe", accessibilityLabel: "Open Browser Tab", action: onOpenBrowser)
-                        .help("Open Browser Tab")
+                        .help("Open Browser Tab".localized)
                 }
             }
             .padding(.leading, UIMetrics.spacing4)
@@ -212,7 +212,7 @@ struct PaneTabStrip: View {
     }
 
     private func shortcutTooltip(_ name: String, for action: ShortcutAction) -> String {
-        "\(name) (\(KeyBindingStore.shared.combo(for: action).displayString))"
+        "\(name.localized) (\(KeyBindingStore.shared.combo(for: action).displayString))"
     }
 
     private var developmentBadge: some View {
@@ -509,16 +509,16 @@ private struct TabCell: View {
             .accessibilityAddTraits(active ? .isSelected : [])
             .accessibilityAddTraits(.isButton)
             .contextMenu {
-                Button("New Tab to the Left") { onCreateLeft() }
-                Button("New Tab to the Right") { onCreateRight() }
+                Button("New Tab to the Left".localized) { onCreateLeft() }
+                Button("New Tab to the Right".localized) { onCreateRight() }
                 Divider()
-                Button("Rename Tab") { startRename() }
+                Button("Rename Tab".localized) { startRename() }
                 if tab.hasCustomTitle {
-                    Button("Reset Title") { onSetCustomTitle(nil) }
+                    Button("Reset Title".localized) { onSetCustomTitle(nil) }
                 }
-                Button("Set Tab Color…") { showColorPicker = true }
+                Button("Set Tab Color…".localized) { showColorPicker = true }
                 if tab.colorID != nil {
-                    Button("Reset Tab Color") { onSetColorID(nil) }
+                    Button("Reset Tab Color".localized) { onSetColorID(nil) }
                 }
                 Divider()
                 Button(tab.isPinned ? "Unpin Tab" : "Pin Tab") {
@@ -527,13 +527,13 @@ private struct TabCell: View {
                 if !tab.isPinned || hasClosableSiblings {
                     Divider()
                     if !tab.isPinned {
-                        Button("Close Tab") { onClose() }
+                        Button("Close Tab".localized) { onClose() }
                     }
-                    Button("Close Other Tabs") { onCloseOthers() }
+                    Button("Close Other Tabs".localized) { onCloseOthers() }
                         .disabled(closableOthersCount == 0)
-                    Button("Close Tabs to the Left") { onCloseLeft() }
+                    Button("Close Tabs to the Left".localized) { onCloseLeft() }
                         .disabled(closableLeftCount == 0)
-                    Button("Close Tabs to the Right") { onCloseRight() }
+                    Button("Close Tabs to the Right".localized) { onCloseRight() }
                         .disabled(closableRightCount == 0)
                 }
             }
@@ -598,7 +598,7 @@ private struct TabCell: View {
                     .opacity(closeButtonVisible ? 1 : 0)
                     .allowsHitTesting(closeButtonVisible)
                     .onTapGesture(perform: onClose)
-                    .accessibilityLabel("Close Tab")
+                    .accessibilityLabel("Close Tab".localized)
                     .accessibilityAddTraits(.isButton)
             }
         }
@@ -673,7 +673,7 @@ private struct TabCell: View {
         } else if tab.isOffline, !active {
             Image(systemName: "moon.zzz")
                 .font(.system(size: UIMetrics.fontBody, weight: .semibold))
-                .help("Idle — terminal freed to save memory. Reopens when selected.")
+                .help("Idle — terminal freed to save memory. Reopens when selected.".localized)
         } else if let customIconSymbol = tab.customIconSymbol {
             Image(systemName: customIconSymbol)
                 .font(.system(size: UIMetrics.fontBody, weight: .semibold))

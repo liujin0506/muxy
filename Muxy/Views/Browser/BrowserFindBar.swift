@@ -14,7 +14,7 @@ struct BrowserFindBar: View {
                 .font(.system(size: UIMetrics.fontFootnote, weight: .medium))
                 .foregroundStyle(MuxyTheme.fgMuted)
 
-            TextField("Find on page", text: $query)
+            TextField("Find on page".localized, text: $query)
                 .textFieldStyle(.plain)
                 .font(.system(size: UIMetrics.fontBody))
                 .foregroundStyle(noMatch ? MuxyTheme.warning : MuxyTheme.fg)

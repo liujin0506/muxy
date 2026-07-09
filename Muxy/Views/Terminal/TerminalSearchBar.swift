@@ -17,7 +17,7 @@ struct TerminalSearchBar: View {
                         .foregroundStyle(MuxyTheme.fgMuted)
                         .accessibilityHidden(true)
 
-                    TextField("Search", text: $searchState.needle)
+                    TextField("Search".localized, text: $searchState.needle)
                         .textFieldStyle(.plain)
                         .font(.system(size: UIMetrics.fontBody))
                         .foregroundStyle(MuxyTheme.fg)
@@ -50,21 +50,21 @@ struct TerminalSearchBar: View {
                         .font(.system(size: UIMetrics.fontCaption, weight: .semibold))
                 }
                 .buttonStyle(SearchBarButtonStyle())
-                .accessibilityLabel("Previous Match")
+                .accessibilityLabel("Previous Match".localized)
 
                 Button(action: onNavigateNext) {
                     Image(systemName: "chevron.down")
                         .font(.system(size: UIMetrics.fontCaption, weight: .semibold))
                 }
                 .buttonStyle(SearchBarButtonStyle())
-                .accessibilityLabel("Next Match")
+                .accessibilityLabel("Next Match".localized)
 
                 Button(action: onClose) {
                     Image(systemName: "xmark")
                         .font(.system(size: UIMetrics.fontCaption, weight: .semibold))
                 }
                 .buttonStyle(SearchBarButtonStyle())
-                .accessibilityLabel("Close Search")
+                .accessibilityLabel("Close Search".localized)
             }
             .padding(.horizontal, UIMetrics.spacing4)
             .frame(height: UIMetrics.scaled(32))
