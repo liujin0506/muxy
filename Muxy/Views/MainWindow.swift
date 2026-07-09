@@ -105,7 +105,7 @@ struct MainWindow: View {
 
     private var showsBreadcrumb: Bool { layout.topbar == .breadcrumb && !isExtensionSidebarActive }
 
-    var body: some View {
+    private var windowBase: some View {
         HStack(spacing: 0) {
             sidebarColumn
             mainWorkspaceColumn
@@ -193,6 +193,10 @@ struct MainWindow: View {
         .background(WindowConfigurator(configVersion: ghostty.configVersion, uiScalePreset: UIScale.shared.preset))
         .background(WindowTitleUpdater(title: windowTitle))
         .ignoresSafeArea(.container, edges: .top)
+    }
+
+    var body: some View {
+        windowBase
         .onReceive(NotificationCenter.default.publisher(for: .openProjectPicker)) { _ in
             showProjectPicker = true
         }
