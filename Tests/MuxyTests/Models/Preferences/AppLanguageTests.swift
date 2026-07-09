@@ -3,7 +3,7 @@ import Testing
 
 @testable import Muxy
 
-@Suite("App language preference")
+@Suite("App language preference", .serialized)
 struct AppLanguageTests {
     private static let suiteName = "app-language-tests"
 
