@@ -40,7 +40,7 @@ jobs:
       - name: Build unsigned app
         run: |
           chmod +x scripts/build-release.sh scripts/create-icns.sh
-          scripts/build-release.sh --arch arm64 --version 0.0.0-dev
+          scripts/build-release.sh --arch arm64 --version 0.0.0
 
       - name: Ad-hoc sign for local launch
         run: codesign --force --deep --sign - build/Muxy.app
