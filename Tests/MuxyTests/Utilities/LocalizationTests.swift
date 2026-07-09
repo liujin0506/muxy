@@ -7,7 +7,10 @@ import Testing
 struct LocalizationTests {
     @Test("Simplified Chinese strings are bundled and resolve")
     func simplifiedChineseResolves() throws {
-        let path = try #require(Bundle.module.path(forResource: "zh-Hans", ofType: "lproj"))
+        let contents = (try? FileManager.default.subpathsOfDirectory(atPath: Bundle.module.bundleURL.path)) ?? []
+        let diagnostics = "bundle contents: \(contents.sorted())"
+
+        let path = try #require(Bundle.module.path(forResource: "zh-Hans", ofType: "lproj"), Comment(rawValue: diagnostics))
         let bundle = try #require(Bundle(path: path))
 
         #expect(bundle.localizedString(forKey: "Layout", value: "missing", table: nil) == "布局")
