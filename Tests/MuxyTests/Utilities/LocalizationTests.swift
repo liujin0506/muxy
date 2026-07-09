@@ -23,6 +23,9 @@ struct LocalizationTests {
         #expect(bundle.localizedString(forKey: "Show Status Bar", value: "missing", table: nil) == "显示状态栏")
         #expect(bundle.localizedString(forKey: "Built-in", value: "missing", table: nil) == "内置")
         #expect(bundle.localizedString(forKey: "Display Language", value: "missing", table: nil) == "显示语言")
+        #expect(bundle.localizedString(forKey: "Remote Devices", value: "missing", table: nil) == "远程设备")
+        #expect(bundle.localizedString(forKey: "Voice Recording", value: "missing", table: nil) == "语音录制")
+        #expect(bundle.localizedString(forKey: "Reset to Defaults", value: "missing", table: nil) == "重置为默认")
     }
 
     @Test("English base strings are bundled and resolve")
