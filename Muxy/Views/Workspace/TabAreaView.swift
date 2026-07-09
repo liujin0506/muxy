@@ -234,9 +234,9 @@ private struct BrowserDisabledPlaceholder: View {
         VStack(spacing: 8) {
             Image(systemName: "globe.badge.chevron.backward")
                 .font(.system(size: 32, weight: .light))
-            Text("Built-in browser is disabled")
+            Text("Built-in browser is disabled".localized)
                 .font(.headline)
-            Text("Enable it in Settings → Browser.")
+            Text("Enable it in Settings → Browser.".localized)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

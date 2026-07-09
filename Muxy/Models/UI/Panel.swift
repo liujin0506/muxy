@@ -8,8 +8,8 @@ enum PanelPosition: String, CaseIterable, Identifiable, Codable {
 
     var displayName: String {
         switch self {
-        case .right: "Right"
-        case .bottom: "Bottom"
+        case .right: "Right".localized
+        case .bottom: "Bottom".localized
         }
     }
 

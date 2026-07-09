@@ -10,7 +10,7 @@ struct UpdateBadge: View {
             HStack(spacing: UIMetrics.spacing2) {
                 Image(systemName: "arrow.down.circle.fill")
                     .font(.system(size: UIMetrics.fontXS, weight: .bold))
-                Text("Update \(version)")
+                Text("Update %@".localized(version))
                     .font(.system(size: UIMetrics.fontCaption, weight: .semibold, design: .monospaced))
                     .lineLimit(1)
             }

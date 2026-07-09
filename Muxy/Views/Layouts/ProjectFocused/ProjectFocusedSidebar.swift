@@ -81,23 +81,23 @@ struct ProjectFocusedSidebar: View {
             ))
             .opacity(isHidden ? 0 : 1)
             .accessibilityElement(children: .contain)
-            .accessibilityLabel("Sidebar")
+            .accessibilityLabel("Sidebar".localized)
             .alert(
                 "Remove \"\(projectPendingRemoval?.name ?? "")\"?",
                 isPresented: removalAlertBinding,
                 presenting: projectPendingRemoval
             ) { project in
-                Button("Remove", role: .destructive) {
+                Button("Remove".localized, role: .destructive) {
                     performRemove(project)
                     projectPendingRemoval = nil
                 }
                 .keyboardShortcut(.defaultAction)
-                Button("Cancel", role: .cancel) {
+                Button("Cancel".localized, role: .cancel) {
                     projectPendingRemoval = nil
                 }
                 .keyboardShortcut(.cancelAction)
             } message: { _ in
-                Text("This will remove the project from Muxy. Project files on disk will not be deleted.")
+                Text("This will remove the project from Muxy. Project files on disk will not be deleted.".localized)
             }
     }
 
@@ -121,7 +121,7 @@ struct ProjectFocusedSidebar: View {
                 Button {
                     openLocalProjectPicker()
                 } label: {
-                    Label("Local", systemImage: "folder")
+                    Label("Local".localized, systemImage: "folder")
                 }
                 remoteProjectMenu
             } label: {
@@ -136,7 +136,7 @@ struct ProjectFocusedSidebar: View {
 
     private var sortMenu: some View {
         Menu {
-            Picker("Sort Projects By", selection: $sortModeRaw) {
+            Picker("Sort Projects By".localized, selection: $sortModeRaw) {
                 ForEach(ProjectSortMode.allCases) { mode in
                     Label(mode.title, systemImage: mode.systemImage).tag(mode.rawValue)
                 }
@@ -148,14 +148,14 @@ struct ProjectFocusedSidebar: View {
         .menuStyle(.button)
         .menuIndicator(.hidden)
         .buttonStyle(.plain)
-        .help("Sort Projects: \(sortMode.title)")
+        .help("Sort Projects: %@".localized(sortMode.title))
     }
 
     private var remoteProjectMenu: some View {
         Menu {
             let devices = remoteDeviceStore.sshDevices()
             if devices.isEmpty {
-                Button("No devices") {}
+                Button("No devices".localized) {}
                     .disabled(true)
             } else {
                 ForEach(devices) { device in
@@ -175,10 +175,10 @@ struct ProjectFocusedSidebar: View {
                 SettingsFocusCoordinator.shared.request(.remoteDevices)
                 NotificationCenter.default.post(name: .openSettingsModal, object: nil)
             } label: {
-                Label("Manage Remote Devices", systemImage: "server.rack")
+                Label("Manage Remote Devices".localized, systemImage: "server.rack")
             }
         } label: {
-            Label("Remote", systemImage: "network")
+            Label("Remote".localized, systemImage: "network")
         }
     }
 
@@ -357,7 +357,7 @@ struct ProjectFocusedSidebar: View {
     }
 
     private func shortcutTooltip(_ name: String, for action: ShortcutAction) -> String {
-        "\(name) (\(KeyBindingStore.shared.combo(for: action).displayString))"
+        "\(name.localized) (\(KeyBindingStore.shared.combo(for: action).displayString))"
     }
 
     private func projectDragGesture(for project: Project) -> some Gesture {
@@ -505,7 +505,7 @@ private struct AddProjectButton: View {
             Label(expanded: expanded)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Add Project")
+        .accessibilityLabel("Add Project".localized)
     }
 
     struct Label: View {
@@ -521,7 +521,7 @@ private struct AddProjectButton: View {
                 }
             }
             .onHover { hovered = $0 }
-            .accessibilityLabel("Add Project")
+            .accessibilityLabel("Add Project".localized)
         }
 
         private var collapsedLayout: some View {
@@ -547,7 +547,7 @@ private struct AddProjectButton: View {
                 }
                 .frame(width: UIMetrics.iconXXL, height: UIMetrics.iconXXL)
 
-                Text("Add Project")
+                Text("Add Project".localized)
                     .font(.system(size: UIMetrics.fontBody, weight: .medium))
                     .foregroundStyle(hovered ? MuxyTheme.accent : MuxyTheme.fgMuted)
                     .lineLimit(1)
@@ -574,7 +574,7 @@ private enum SortMenuButton {
                     in: RoundedRectangle(cornerRadius: UIMetrics.radiusMD)
                 )
                 .onHover { hovered = $0 }
-                .accessibilityLabel("Sort Projects")
+                .accessibilityLabel("Sort Projects".localized)
         }
     }
 }

@@ -129,7 +129,7 @@ struct OpenInIDEControl: View {
             }
 
             if !hasTargets {
-                Text("No supported editors found")
+                Text("No supported editors found".localized)
                     .font(.system(size: UIMetrics.fontBody))
                     .foregroundStyle(MuxyTheme.fgMuted)
                     .padding(.leading, UIMetrics.spacing5)

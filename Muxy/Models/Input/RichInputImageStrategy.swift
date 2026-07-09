@@ -8,8 +8,8 @@ enum RichInputImageStrategy: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .clipboard: "Clipboard Paste"
-        case .inlinePath: "Inline File Path"
+        case .clipboard: "Clipboard Paste".localized
+        case .inlinePath: "Inline File Path".localized
         }
     }
 

@@ -53,7 +53,7 @@ struct TerminalPane: View {
                 onSplitRequest: onSplitRequest
             )
             .accessibilityElement(children: .contain)
-            .accessibilityLabel("Terminal")
+            .accessibilityLabel("Terminal".localized)
             .accessibilityAddTraits(.allowsDirectInteraction)
             .opacity(remoteOwnerName == nil ? 1 : 0)
             .allowsHitTesting(remoteOwnerName == nil)
@@ -105,17 +105,17 @@ struct SleepingTabPlaceholder: View {
             Image(systemName: "moon.zzz")
                 .font(.system(size: UIMetrics.fontMega))
                 .foregroundStyle(MuxyTheme.fgMuted)
-            Text("Tab is asleep")
+            Text("Tab is asleep".localized)
                 .font(.system(size: UIMetrics.fontHeadline, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
-            Text("This terminal was freed to save memory. Wake it to resume your session.")
+            Text("This terminal was freed to save memory. Wake it to resume your session.".localized)
                 .font(.system(size: UIMetrics.fontBody))
                 .foregroundStyle(MuxyTheme.fgMuted)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: UIMetrics.scaled(360))
             Button(action: onWake) {
                 HStack(spacing: UIMetrics.spacing4) {
-                    Text("Wake")
+                    Text("Wake".localized)
                     if isFocused {
                         Text("⏎")
                             .font(.system(size: UIMetrics.fontFootnote, weight: .medium, design: .rounded))
@@ -133,7 +133,7 @@ struct SleepingTabPlaceholder: View {
         .onTapGesture(perform: onWake)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("Tab is asleep")
+        .accessibilityLabel("Tab is asleep".localized)
         .accessibilityHint("Wake the terminal to resume your session")
     }
 }
@@ -148,10 +148,10 @@ struct RemoteControlledPlaceholder: View {
             Image(systemName: "iphone.gen3")
                 .font(.system(size: UIMetrics.fontMega))
                 .foregroundStyle(MuxyTheme.fgMuted)
-            Text("Controlled by \(deviceName)")
+            Text("Controlled by %@".localized(deviceName))
                 .font(.system(size: UIMetrics.fontHeadline, weight: .semibold))
                 .foregroundStyle(MuxyTheme.fg)
-            Text("This terminal session is currently being used on \(deviceName). Take over to resume on Mac.")
+            Text("This terminal session is currently being used on %@. Take over to resume on Mac.".localized(deviceName))
                 .font(.system(size: UIMetrics.fontBody))
                 .foregroundStyle(MuxyTheme.fgMuted)
                 .multilineTextAlignment(.center)
@@ -160,7 +160,7 @@ struct RemoteControlledPlaceholder: View {
                 onTakeOver()
             } label: {
                 HStack(spacing: UIMetrics.spacing4) {
-                    Text("Take Over")
+                    Text("Take Over".localized)
                     Text("⌘↩")
                         .font(.system(size: UIMetrics.fontFootnote, weight: .medium, design: .rounded))
                         .opacity(0.72)

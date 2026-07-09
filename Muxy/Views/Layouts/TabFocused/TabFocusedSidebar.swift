@@ -101,7 +101,7 @@ private struct TabFocusedAddProjectRow: View {
                         .foregroundStyle(hovered ? MuxyTheme.accent : MuxyTheme.fgMuted)
                 }
                 .frame(width: UIMetrics.iconXL, height: UIMetrics.iconXL)
-                Text("Add Project")
+                Text("Add Project".localized)
                     .font(.system(size: UIMetrics.fontEmphasis, weight: .medium))
                     .foregroundStyle(hovered ? MuxyTheme.accent : MuxyTheme.fgMuted)
                 Spacer(minLength: 0)
@@ -113,7 +113,7 @@ private struct TabFocusedAddProjectRow: View {
         }
         .buttonStyle(.plain)
         .help(shortcutTooltip)
-        .accessibilityLabel("Add Project")
+        .accessibilityLabel("Add Project".localized)
     }
 
     private var shortcutTooltip: String {

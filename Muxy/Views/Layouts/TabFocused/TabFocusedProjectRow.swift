@@ -78,8 +78,8 @@ struct TabFocusedProjectRow: View {
                 Image(systemName: "pin.fill")
                     .font(.system(size: UIMetrics.fontXS, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fgMuted)
-                    .help("Pinned")
-                    .accessibilityLabel("Pinned")
+                    .help("Pinned".localized)
+                    .accessibilityLabel("Pinned".localized)
             }
         }
         .padding(.horizontal, TabFocusedSidebarMetrics.rowHorizontalInset)
@@ -90,7 +90,7 @@ struct TabFocusedProjectRow: View {
         .onTapGesture { toggle() }
         .contextMenu {
             if project.isHome {
-                Button("Hide Home") { HomeProjectPreferences.isVisible = false }
+                Button("Hide Home".localized) { HomeProjectPreferences.isVisible = false }
             } else {
                 projectContextMenu
             }
@@ -128,12 +128,12 @@ struct TabFocusedProjectRow: View {
             "Remove \"\(project.name)\"?",
             isPresented: $projectPendingRemoval
         ) {
-            Button("Remove", role: .destructive) { performRemove() }
+            Button("Remove".localized, role: .destructive) { performRemove() }
                 .keyboardShortcut(.defaultAction)
-            Button("Cancel", role: .cancel) {}
+            Button("Cancel".localized, role: .cancel) {}
                 .keyboardShortcut(.cancelAction)
         } message: {
-            Text("This will remove the project from Muxy. Project files on disk will not be deleted.")
+            Text("This will remove the project from Muxy. Project files on disk will not be deleted.".localized)
         }
     }
 
@@ -158,30 +158,30 @@ struct TabFocusedProjectRow: View {
             }
             Divider()
         }
-        Button("Set Logo…") { pickLogoImage() }
+        Button("Set Logo…".localized) { pickLogoImage() }
         if project.logo != nil {
-            Button("Remove Logo") { projectStore.setLogo(id: project.id, to: nil) }
+            Button("Remove Logo".localized) { projectStore.setLogo(id: project.id, to: nil) }
         }
-        Button("Set Icon…") { showSymbolPicker = true }
+        Button("Set Icon…".localized) { showSymbolPicker = true }
         if project.icon != nil {
-            Button("Remove Icon") { projectStore.setIcon(id: project.id, to: nil) }
+            Button("Remove Icon".localized) { projectStore.setIcon(id: project.id, to: nil) }
         }
-        Button("Set Icon Color…") { showColorPicker = true }
+        Button("Set Icon Color…".localized) { showColorPicker = true }
         if project.iconColor != nil {
-            Button("Reset Icon Color") { projectStore.setIconColor(id: project.id, to: nil) }
+            Button("Reset Icon Color".localized) { projectStore.setIconColor(id: project.id, to: nil) }
         }
         Divider()
-        Button("Rename Project") { startRename() }
+        Button("Rename Project".localized) { startRename() }
         if isGitRepo {
             Divider()
-            Toggle("Worktrees", isOn: worktreesEnabledBinding)
+            Toggle("Worktrees".localized, isOn: worktreesEnabledBinding)
             if project.worktreesEnabled {
-                Button("Refresh Worktrees") { Task { await refreshWorktrees() } }
-                Button("New Worktree…") { showCreateWorktreeSheet = true }
+                Button("Refresh Worktrees".localized) { Task { await refreshWorktrees() } }
+                Button("New Worktree…".localized) { showCreateWorktreeSheet = true }
             }
         } else if isCheckingGitRepo {
             Divider()
-            Button("Loading Worktrees…") {}
+            Button("Loading Worktrees…".localized) {}
                 .disabled(true)
         }
         if !projectGroupStore.groups.isEmpty {
@@ -189,7 +189,7 @@ struct TabFocusedProjectRow: View {
             ProjectGroupMembershipMenu(project: project)
         }
         Divider()
-        Button("Remove Project", role: .destructive) { projectPendingRemoval = true }
+        Button("Remove Project".localized, role: .destructive) { projectPendingRemoval = true }
     }
 
     private var worktreesEnabledBinding: Binding<Bool> {

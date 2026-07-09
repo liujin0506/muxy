@@ -65,12 +65,12 @@ struct WorktreePopover: View {
             isPresented: removalAlertBinding,
             presenting: pendingRemoval
         ) { confirmation in
-            Button("Remove", role: .destructive) {
+            Button("Remove".localized, role: .destructive) {
                 onRequestRemove(confirmation.worktree)
                 pendingRemoval = nil
             }
             .keyboardShortcut(.defaultAction)
-            Button("Cancel", role: .cancel) {
+            Button("Cancel".localized, role: .cancel) {
                 pendingRemoval = nil
             }
             .keyboardShortcut(.cancelAction)
@@ -184,14 +184,14 @@ private struct WorktreePopoverRow: View {
         }
         .contextMenu {
             if worktree.isPrimary {
-                Text("Primary worktree").font(.system(size: UIMetrics.fontFootnote))
+                Text("Primary worktree".localized).font(.system(size: UIMetrics.fontFootnote))
             } else if let onRemove {
-                Button("Rename") { startRename() }
+                Button("Rename".localized) { startRename() }
                 Divider()
-                Button("Remove", role: .destructive, action: onRemove)
+                Button("Remove".localized, role: .destructive, action: onRemove)
                     .disabled(isRemoving)
             } else {
-                Button("Rename") { startRename() }
+                Button("Rename".localized) { startRename() }
             }
         }
     }

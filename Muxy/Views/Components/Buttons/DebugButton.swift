@@ -18,7 +18,7 @@ struct DebugButton: View {
         }
         .buttonStyle(.plain)
         .onHover { hovered = $0 }
-        .help("Debug Info")
+        .help("Debug Info".localized)
         .popover(isPresented: $showingPopover, arrowEdge: .bottom) {
             DebugInfoPopover()
         }
@@ -35,7 +35,7 @@ private struct DebugInfoPopover: View {
                 Image(systemName: "ladybug.fill")
                     .font(.system(size: UIMetrics.fontFootnote, weight: .semibold))
                     .foregroundStyle(MuxyTheme.warning)
-                Text("Debug")
+                Text("Debug".localized)
                     .font(.system(size: UIMetrics.fontBody, weight: .semibold))
                     .foregroundStyle(MuxyTheme.fg)
                 Spacer(minLength: UIMetrics.spacing6)

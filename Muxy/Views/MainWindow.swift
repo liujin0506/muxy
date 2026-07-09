@@ -488,7 +488,7 @@ struct MainWindow: View {
             if !isExtensionSidebarActive {
                 NavigationArrowButton(
                     symbol: isTabFocused ? "sidebar.squares.left" : "sidebar.left",
-                    label: isTabFocused ? "Switch to Project Focused Layout" : "Switch to Tab Focused Layout"
+                    label: isTabFocused ? "Switch to Project Focused Layout".localized : "Switch to Tab Focused Layout".localized
                 ) {
                     NotificationCenter.default.post(name: .toggleAppLayout, object: nil)
                 }
@@ -822,7 +822,7 @@ struct MainWindow: View {
         let storedProjects = projectStore.storedProjects
         let allProjects = TerminalOmniboxWorkspaceItem(
             groupID: nil,
-            name: "All Projects",
+            name: "All Projects".localized,
             projectCount: storedProjects.count
         )
         let groups = projectGroupStore.groups.map { group in
@@ -1960,12 +1960,12 @@ private struct WorktreeActionsModifier: ViewModifier {
                 isPresented: alertBinding,
                 presenting: pendingRemoval
             ) { pending in
-                Button("Remove", role: .destructive) {
+                Button("Remove".localized, role: .destructive) {
                     onPerformRemove(pending)
                     pendingRemoval = nil
                 }
                 .keyboardShortcut(.defaultAction)
-                Button("Cancel", role: .cancel) {
+                Button("Cancel".localized, role: .cancel) {
                     pendingRemoval = nil
                 }
                 .keyboardShortcut(.cancelAction)
