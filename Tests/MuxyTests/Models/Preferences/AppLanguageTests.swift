@@ -5,11 +5,16 @@ import Testing
 
 @Suite("App language preference")
 struct AppLanguageTests {
+    private static let suiteName = "app-language-tests"
+
     private func makeDefaults() -> UserDefaults {
-        let suite = "app-language-tests"
-        let defaults = UserDefaults(suiteName: suite)!
-        defaults.removePersistentDomain(forName: suite)
+        let defaults = UserDefaults(suiteName: Self.suiteName)!
+        defaults.removePersistentDomain(forName: Self.suiteName)
         return defaults
+    }
+
+    private func ownDomain(_ defaults: UserDefaults) -> [String: Any] {
+        defaults.persistentDomain(forName: Self.suiteName) ?? [:]
     }
 
     @Test("Applying a concrete language sets AppleLanguages")
@@ -18,8 +23,9 @@ struct AppLanguageTests {
 
         AppLanguagePreference.apply(.simplifiedChinese, defaults: defaults)
 
-        #expect(defaults.string(forKey: AppLanguagePreference.storageKey) == "zh-Hans")
-        #expect(defaults.stringArray(forKey: "AppleLanguages") == ["zh-Hans"])
+        let domain = ownDomain(defaults)
+        #expect(domain[AppLanguagePreference.storageKey] as? String == "zh-Hans")
+        #expect(domain["AppleLanguages"] as? [String] == ["zh-Hans"])
         #expect(AppLanguagePreference.current(defaults: defaults) == .simplifiedChinese)
     }
 
@@ -30,7 +36,7 @@ struct AppLanguageTests {
 
         AppLanguagePreference.apply(.system, defaults: defaults)
 
-        #expect(defaults.stringArray(forKey: "AppleLanguages") == nil)
+        #expect(ownDomain(defaults)["AppleLanguages"] == nil)
         #expect(AppLanguagePreference.current(defaults: defaults) == .system)
     }
 
