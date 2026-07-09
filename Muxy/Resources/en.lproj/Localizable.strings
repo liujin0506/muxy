@@ -1,0 +1,23 @@
+"Layout" = "Layout";
+"Theme" = "Theme";
+"Interface" = "Interface";
+"Active Sidebar" = "Active Sidebar";
+"Sidebar" = "Sidebar";
+"Worktrees" = "Worktrees";
+
+"App Layout" = "App Layout";
+"Light Theme" = "Light Theme";
+"Dark Theme" = "Dark Theme";
+"Size" = "Size";
+"Tab header width" = "Tab header width";
+
+"Show Status Bar" = "Show Status Bar";
+"Show Resource Usage in Status Bar" = "Show Resource Usage in Status Bar";
+"Show Home" = "Show Home";
+"Auto-expand worktrees on project switch" = "Auto-expand worktrees on project switch";
+"Show unread notification indicator on worktrees" = "Show unread notification indicator on worktrees";
+"Order worktrees by most-recently-used" = "Order worktrees by most-recently-used";
+
+"Built-in" = "Built-in";
+"Default" = "Default";
+"Full-width" = "Full-width";

@@ -1,0 +1,23 @@
+"Layout" = "布局";
+"Theme" = "主题";
+"Interface" = "界面";
+"Active Sidebar" = "活动侧边栏";
+"Sidebar" = "侧边栏";
+"Worktrees" = "工作树";
+
+"App Layout" = "应用布局";
+"Light Theme" = "浅色主题";
+"Dark Theme" = "深色主题";
+"Size" = "尺寸";
+"Tab header width" = "标签页标题宽度";
+
+"Show Status Bar" = "显示状态栏";
+"Show Resource Usage in Status Bar" = "在状态栏显示资源占用";
+"Show Home" = "显示主页";
+"Auto-expand worktrees on project switch" = "切换项目时自动展开工作树";
+"Show unread notification indicator on worktrees" = "在工作树上显示未读通知标记";
+"Order worktrees by most-recently-used" = "按最近使用排序工作树";
+
+"Built-in" = "内置";
+"Default" = "默认";
+"Full-width" = "全宽";

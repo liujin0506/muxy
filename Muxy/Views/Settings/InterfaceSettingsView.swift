@@ -53,14 +53,14 @@ struct InterfaceSettingsView: View {
             SettingsSection("Theme") {
                 SettingsRow("Light Theme") {
                     themeButton(
-                        title: currentLightTheme ?? "Default",
+                        title: currentLightTheme ?? "Default".localized,
                         isPresented: $showLightThemePicker,
                         mode: .light
                     )
                 }
                 SettingsRow("Dark Theme") {
                     themeButton(
-                        title: currentDarkTheme ?? "Default",
+                        title: currentDarkTheme ?? "Default".localized,
                         isPresented: $showDarkThemePicker,
                         mode: .dark
                     )
@@ -102,7 +102,7 @@ struct InterfaceSettingsView: View {
                     HStack {
                         Spacer()
                         Picker("", selection: $activeSidebar) {
-                            Text("Built-in").tag(SidebarSelection.builtinValue)
+                            Text("Built-in".localized).tag(SidebarSelection.builtinValue)
                             ForEach(sidebarProviders) { status in
                                 Text(label(for: status)).tag(status.id)
                             }
@@ -218,7 +218,7 @@ private struct TabHeaderWidthSettingRow: View {
 
     private var valueLabel: String {
         TabWidthPreferences.effectiveMaxWidth(from: maxTabWidth)
-            .map { "\(Int($0))px" } ?? "Full-width"
+            .map { "\(Int($0))px" } ?? "Full-width".localized
     }
 
     var body: some View {
