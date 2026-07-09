@@ -200,3 +200,12 @@
 "Search commands" = "Search commands";
 "Search settings" = "Search settings";
 "Search shortcuts" = "Search shortcuts";
+
+"App" = "App";
+"Terminal" = "Terminal";
+"Browser" = "Browser";
+"Shortcuts" = "Shortcuts";
+"Voice" = "Voice";
+"Notifications" = "Notifications";
+"Backup" = "Backup";
+"JSON" = "JSON";

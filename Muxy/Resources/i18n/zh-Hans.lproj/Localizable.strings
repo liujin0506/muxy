@@ -200,3 +200,12 @@
 "Search commands" = "搜索命令";
 "Search settings" = "搜索设置";
 "Search shortcuts" = "搜索快捷键";
+
+"App" = "应用";
+"Terminal" = "终端";
+"Browser" = "浏览器";
+"Shortcuts" = "快捷键";
+"Voice" = "语音";
+"Notifications" = "通知";
+"Backup" = "备份";
+"JSON" = "JSON";
