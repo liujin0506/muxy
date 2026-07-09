@@ -64,7 +64,7 @@ struct BrowserImportSheet: View {
                 .font(.system(size: SettingsMetrics.labelFontSize, weight: .medium))
                 .foregroundStyle(SettingsStyle.foreground)
             Spacer()
-            Button("Import") { runImport(profile) }
+            Button("Import".localized) { runImport(profile) }
                 .disabled(isImporting)
         }
         .padding(.horizontal, SettingsMetrics.horizontalPadding)
@@ -86,7 +86,7 @@ struct BrowserImportSheet: View {
                 ProgressView().controlSize(.small)
             }
             Spacer()
-            Button("Close", action: onDismiss)
+            Button("Close".localized, action: onDismiss)
                 .keyboardShortcut(.cancelAction)
         }
     }

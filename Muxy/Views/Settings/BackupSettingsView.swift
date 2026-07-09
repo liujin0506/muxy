@@ -61,11 +61,11 @@ struct BackupSettingsView: View {
             }
         }
         .disabled(isWorking)
-        .alert("Import backup?", isPresented: importConfirmationBinding) {
-            Button("Import & Restart", role: .destructive, action: performImport)
-            Button("Cancel", role: .cancel) {}
+        .alert("Import backup?".localized, isPresented: importConfirmationBinding) {
+            Button("Import & Restart".localized, role: .destructive, action: performImport)
+            Button("Cancel".localized, role: .cancel) {}
         } message: {
-            Text("This replaces all current Muxy data and restarts the app. Your current data is backed up first.")
+            Text("This replaces all current Muxy data and restarts the app. Your current data is backed up first.".localized)
         }
     }
 

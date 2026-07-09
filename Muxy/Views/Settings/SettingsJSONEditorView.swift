@@ -37,7 +37,7 @@ struct SettingsJSONEditorView: View {
         .onChange(of: source) { _, _ in reload() }
         .onChange(of: searchText) { _, _ in selectedSearchMatchIndex = 0 }
         .overlay(alignment: .topTrailing) {
-            Button("Find") {
+            Button("Find".localized) {
                 showSearch()
             }
             .keyboardShortcut("f", modifiers: .command)
@@ -80,7 +80,7 @@ struct SettingsJSONEditorView: View {
                 .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(SettingsStyle.mutedForeground)
 
-            TextField("Search JSON", text: $searchText)
+            TextField("Search JSON".localized, text: $searchText)
                 .textFieldStyle(.plain)
                 .font(.system(size: SettingsMetrics.labelFontSize))
                 .focused($isSearchFocused)
@@ -126,7 +126,7 @@ struct SettingsJSONEditorView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
-                Text("JSON Settings")
+                Text("JSON Settings".localized)
                     .font(.system(size: 20, weight: .semibold))
                 Spacer()
                 Picker("Source", selection: $source) {
@@ -170,24 +170,24 @@ struct SettingsJSONEditorView: View {
 
             Spacer()
 
-            Button("Reload") {
+            Button("Reload".localized) {
                 reload()
             }
             .controlSize(.small)
 
             if source == .user {
-                Button("Prettify") {
+                Button("Prettify".localized) {
                     prettify()
                 }
                 .controlSize(.small)
 
-                Button("Reset from Current Settings") {
+                Button("Reset from Current Settings".localized) {
                     SettingsJSONStore.resetUserSettingsFile()
                     reload()
                 }
                 .controlSize(.small)
 
-                Button("Apply") {
+                Button("Apply".localized) {
                     apply()
                 }
                 .controlSize(.small)

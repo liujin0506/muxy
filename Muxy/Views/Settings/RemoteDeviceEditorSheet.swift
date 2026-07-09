@@ -80,12 +80,12 @@ struct RemoteDeviceEditorSheet: View {
             statusRow
 
             HStack(spacing: UIMetrics.spacing3) {
-                Button("Test Connection", action: runTest)
+                Button("Test Connection".localized, action: runTest)
                     .disabled(!canProbe)
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("Cancel".localized, action: onCancel)
                     .keyboardShortcut(.cancelAction)
-                Button("Save", action: save)
+                Button("Save".localized, action: save)
                     .keyboardShortcut(.defaultAction)
                     .disabled(!canSave || probeState == .testing)
             }
@@ -119,7 +119,7 @@ struct RemoteDeviceEditorSheet: View {
                         field(label: "Port", placeholder: "22", text: $port)
                             .onChange(of: port) { probeState = .idle }
                         if !isPortValid {
-                            Text("Port must be between 1 and 65535.")
+                            Text("Port must be between 1 and 65535.".localized)
                                 .font(.system(size: UIMetrics.fontFootnote))
                                 .foregroundStyle(.orange)
                         }
@@ -127,14 +127,14 @@ struct RemoteDeviceEditorSheet: View {
                     .frame(width: UIMetrics.scaled(90))
                 }
                 VStack(alignment: .leading, spacing: UIMetrics.spacing2) {
-                    Text("Identity File")
+                    Text("Identity File".localized)
                         .font(.system(size: UIMetrics.fontFootnote))
                         .foregroundStyle(MuxyTheme.fgMuted)
                     HStack(spacing: UIMetrics.spacing3) {
                         TextField("~/.ssh/id_ed25519", text: $identityFile)
                             .textFieldStyle(.roundedBorder)
                             .onChange(of: identityFile) { probeState = .idle }
-                        Button("Browse…", action: chooseIdentityFile)
+                        Button("Browse…".localized, action: chooseIdentityFile)
                             .fixedSize(horizontal: true, vertical: false)
                     }
                 }
@@ -142,7 +142,7 @@ struct RemoteDeviceEditorSheet: View {
             }
             .padding(.top, UIMetrics.spacing3)
         } label: {
-            Text("Advanced")
+            Text("Advanced".localized)
                 .font(.system(size: UIMetrics.fontFootnote, weight: .medium))
                 .foregroundStyle(MuxyTheme.fgMuted)
         }
@@ -150,7 +150,7 @@ struct RemoteDeviceEditorSheet: View {
 
     private var environmentEditor: some View {
         VStack(alignment: .leading, spacing: UIMetrics.spacing2) {
-            Text("Environment")
+            Text("Environment".localized)
                 .font(.system(size: UIMetrics.fontFootnote))
                 .foregroundStyle(MuxyTheme.fgMuted)
             TextEditor(text: $environmentText)
@@ -173,20 +173,20 @@ struct RemoteDeviceEditorSheet: View {
     private var statusRow: some View {
         switch probeState {
         case .idle:
-            Text("Muxy uses your system SSH config, keys, and agent. No passwords are stored.")
+            Text("Muxy uses your system SSH config, keys, and agent. No passwords are stored.".localized)
                 .font(.system(size: UIMetrics.fontFootnote))
                 .foregroundStyle(MuxyTheme.fgMuted)
         case .testing:
             HStack(spacing: UIMetrics.spacing2) {
                 ProgressView().controlSize(.small)
-                Text("Testing connection…")
+                Text("Testing connection…".localized)
                     .font(.system(size: UIMetrics.fontFootnote))
                     .foregroundStyle(MuxyTheme.fgMuted)
             }
         case .succeeded:
             HStack(spacing: UIMetrics.spacing2) {
                 Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
-                Text("Connection succeeded")
+                Text("Connection succeeded".localized)
                     .font(.system(size: UIMetrics.fontFootnote))
                     .foregroundStyle(MuxyTheme.fg)
             }

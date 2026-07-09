@@ -85,7 +85,7 @@ private struct ProviderToggleRow: View {
                     if refreshed {
                         Label("Done", systemImage: "checkmark")
                     } else {
-                        Text("Refresh")
+                        Text("Refresh".localized)
                     }
                 }
                 .buttonStyle(.plain)

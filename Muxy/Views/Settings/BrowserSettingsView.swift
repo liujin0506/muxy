@@ -114,22 +114,22 @@ struct BrowserSettingsView: View {
             isPresented: deleteAlertBinding,
             presenting: profilePendingDelete
         ) { profile in
-            Button("Delete", role: .destructive) {
+            Button("Delete".localized, role: .destructive) {
                 historyStore.clear(profileID: profile.id)
                 profileStore.remove(id: profile.id)
                 profilePendingDelete = nil
             }
             .keyboardShortcut(.defaultAction)
-            Button("Cancel", role: .cancel) { profilePendingDelete = nil }
+            Button("Cancel".localized, role: .cancel) { profilePendingDelete = nil }
         } message: { _ in
-            Text("This permanently deletes the profile's cookies and browsing data.")
+            Text("This permanently deletes the profile's cookies and browsing data.".localized)
         }
         .alert(
             "Clear data for “\(profilePendingClear?.name ?? "")”?",
             isPresented: clearAlertBinding,
             presenting: profilePendingClear
         ) { profile in
-            Button("Clear Data", role: .destructive) {
+            Button("Clear Data".localized, role: .destructive) {
                 let id = profile.id
                 let name = profile.name
                 profilePendingClear = nil
@@ -140,9 +140,9 @@ struct BrowserSettingsView: View {
                 }
             }
             .keyboardShortcut(.defaultAction)
-            Button("Cancel", role: .cancel) { profilePendingClear = nil }
+            Button("Cancel".localized, role: .cancel) { profilePendingClear = nil }
         } message: { _ in
-            Text("This signs out and removes all cookies, cache, and logins for this profile, including imported ones.")
+            Text("This signs out and removes all cookies, cache, and logins for this profile, including imported ones.".localized)
         }
     }
 
@@ -153,7 +153,7 @@ struct BrowserSettingsView: View {
             HStack(spacing: 6) {
                 Image(systemName: "plus")
                     .font(.system(size: 11, weight: .semibold))
-                Text("Add Profile")
+                Text("Add Profile".localized)
                     .font(.system(size: SettingsMetrics.labelFontSize, weight: .medium))
             }
             .foregroundStyle(SettingsStyle.accent)
@@ -249,7 +249,7 @@ private struct BrowserProfileRow: View {
     }
 
     private var defaultBadge: some View {
-        Text("Default")
+        Text("Default".localized)
             .font(.system(size: SettingsMetrics.footnoteFontSize, weight: .medium))
             .foregroundStyle(SettingsStyle.mutedForeground)
             .padding(.horizontal, 6)
@@ -259,14 +259,14 @@ private struct BrowserProfileRow: View {
 
     private var actionsMenu: some View {
         Menu {
-            Button("Import from Chrome…", action: onImport)
+            Button("Import from Chrome…".localized, action: onImport)
             if !profile.isDefault {
-                Button("Rename…", action: onRename)
+                Button("Rename…".localized, action: onRename)
             }
             Divider()
-            Button("Clear Data", role: .destructive, action: onClearData)
+            Button("Clear Data".localized, role: .destructive, action: onClearData)
             if !profile.isDefault {
-                Button("Delete", role: .destructive, action: onDelete)
+                Button("Delete".localized, role: .destructive, action: onDelete)
             }
         } label: {
             Image(systemName: "ellipsis")
@@ -323,14 +323,14 @@ private struct BrowserProfileEditorSheet: View {
             Text(mode.title)
                 .font(.system(size: UIMetrics.fontHeadline, weight: .semibold))
 
-            TextField("Profile name", text: $name)
+            TextField("Profile name".localized, text: $name)
                 .settingsTextInput(maxWidth: .infinity)
 
             HStack(spacing: UIMetrics.spacing3) {
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("Cancel".localized, action: onCancel)
                     .keyboardShortcut(.cancelAction)
-                Button("Save") { onSave(name) }
+                Button("Save".localized) { onSave(name) }
                     .keyboardShortcut(.defaultAction)
                     .disabled(!canSave)
             }

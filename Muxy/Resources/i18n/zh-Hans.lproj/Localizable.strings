@@ -193,3 +193,10 @@
 "When enabled, releasing the mouse after selecting text in the terminal copies it to the clipboard." = "启用后，在终端中选择文本后松开鼠标即会将其复制到剪贴板。";
 "host or ~/.ssh/config alias" = "主机或 ~/.ssh/config 别名";
 "optional" = "可选";
+
+"Command" = "命令";
+"Profile name" = "配置名称";
+"Search JSON" = "搜索 JSON";
+"Search commands" = "搜索命令";
+"Search settings" = "搜索设置";
+"Search shortcuts" = "搜索快捷键";

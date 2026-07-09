@@ -64,7 +64,7 @@ struct ProjectsSettingsView: View {
                         HStack {
                             Spacer()
                             Picker("", selection: $defaultFileOpener) {
-                                Text("Built-in (IDE)").tag(FileOpenerSelection.builtinValue)
+                                Text("Built-in (IDE)".localized).tag(FileOpenerSelection.builtinValue)
                                 ForEach(fileOpeners) { binding in
                                     Text(label(for: binding)).tag(binding.id)
                                 }
@@ -117,19 +117,19 @@ struct ProjectsSettingsView: View {
 
     private var worktreeLocationControl: some View {
         VStack(alignment: .leading, spacing: 7) {
-            Text("Default path for new worktrees")
+            Text("Default path for new worktrees".localized)
                 .font(.system(size: SettingsMetrics.labelFontSize))
 
             HStack(alignment: .center, spacing: 8) {
                 pathDisplay
                     .layoutPriority(1)
 
-                Button("Choose Folder...") {
+                Button("Choose Folder...".localized) {
                     chooseDefaultWorktreeParentPath()
                 }
                 .fixedSize(horizontal: true, vertical: false)
 
-                Button("Use App Default") {
+                Button("Use App Default".localized) {
                     defaultWorktreeParentPath = ""
                 }
                 .fixedSize(horizontal: true, vertical: false)

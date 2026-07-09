@@ -193,3 +193,10 @@
 "When enabled, releasing the mouse after selecting text in the terminal copies it to the clipboard." = "When enabled, releasing the mouse after selecting text in the terminal copies it to the clipboard.";
 "host or ~/.ssh/config alias" = "host or ~/.ssh/config alias";
 "optional" = "optional";
+
+"Command" = "Command";
+"Profile name" = "Profile name";
+"Search JSON" = "Search JSON";
+"Search commands" = "Search commands";
+"Search settings" = "Search settings";
+"Search shortcuts" = "Search shortcuts";

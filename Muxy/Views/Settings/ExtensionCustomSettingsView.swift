@@ -14,7 +14,7 @@ struct ExtensionCustomSettingsView: View {
             if let muxyExtension {
                 if muxyExtension.manifest.settings.isEmpty {
                     SettingsSection("Settings") {
-                        Text("This extension does not declare any settings.")
+                        Text("This extension does not declare any settings.".localized)
                             .font(.system(size: SettingsMetrics.footnoteFontSize))
                             .foregroundStyle(SettingsStyle.mutedForeground)
                             .padding(.horizontal, SettingsMetrics.horizontalPadding)
@@ -32,7 +32,7 @@ struct ExtensionCustomSettingsView: View {
                     }
                 }
             } else {
-                Text("Extension is not loaded.")
+                Text("Extension is not loaded.".localized)
                     .font(.system(size: SettingsMetrics.footnoteFontSize))
                     .foregroundStyle(SettingsStyle.mutedForeground)
                     .padding(.horizontal, SettingsMetrics.horizontalPadding)
