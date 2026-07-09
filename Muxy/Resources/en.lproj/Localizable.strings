@@ -21,3 +21,12 @@
 "Built-in" = "Built-in";
 "Default" = "Default";
 "Full-width" = "Full-width";
+
+"Language" = "Language";
+"Display Language" = "Display Language";
+"System" = "System";
+"Muxy restarts to apply a new language." = "Muxy restarts to apply a new language.";
+"Restart Muxy?" = "Restart Muxy?";
+"Muxy needs to restart to change the display language." = "Muxy needs to restart to change the display language.";
+"Restart" = "Restart";
+"Cancel" = "Cancel";

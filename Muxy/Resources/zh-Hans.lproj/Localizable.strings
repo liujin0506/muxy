@@ -21,3 +21,12 @@
 "Built-in" = "内置";
 "Default" = "默认";
 "Full-width" = "全宽";
+
+"Language" = "语言";
+"Display Language" = "显示语言";
+"System" = "跟随系统";
+"Muxy restarts to apply a new language." = "更改语言后 Muxy 将重启以生效。";
+"Restart Muxy?" = "重启 Muxy？";
+"Muxy needs to restart to change the display language." = "更改显示语言需要重启 Muxy。";
+"Restart" = "重启";
+"Cancel" = "取消";

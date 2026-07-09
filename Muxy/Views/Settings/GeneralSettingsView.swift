@@ -5,10 +5,28 @@ struct GeneralSettingsView: View {
     private var updateChannelRaw = UpdateChannel.stable.rawValue
     @AppStorage(QuitConfirmationPreferences.confirmQuitKey)
     private var confirmQuit = true
+    @AppStorage(AppLanguagePreference.storageKey)
+    private var storedLanguageRaw = AppLanguage.system.rawValue
+    @State private var pendingLanguage: AppLanguage?
     @State private var sentry = SentryService.shared
 
     var body: some View {
         SettingsContainer {
+            SettingsSection(
+                "Language",
+                footer: "Muxy restarts to apply a new language."
+            ) {
+                SettingsRow("Display Language") {
+                    Picker("", selection: languageBinding) {
+                        ForEach(AppLanguage.allCases) { language in
+                            Text(language.displayName).tag(language)
+                        }
+                    }
+                    .labelsHidden()
+                    .frame(width: SettingsMetrics.controlWidth, alignment: .trailing)
+                }
+            }
+
             SettingsSection(
                 "Updates",
                 footer: "The Beta channel ships every change merged to main and may be unstable. "
@@ -46,6 +64,37 @@ struct GeneralSettingsView: View {
                 }
             }
         }
+        .alert("Restart Muxy?".localized, isPresented: restartConfirmationBinding) {
+            Button("Restart".localized, action: applyPendingLanguage)
+            Button("Cancel".localized, role: .cancel) { pendingLanguage = nil }
+        } message: {
+            Text("Muxy needs to restart to change the display language.".localized)
+        }
+    }
+
+    private var storedLanguage: AppLanguage {
+        AppLanguage(rawValue: storedLanguageRaw) ?? .system
+    }
+
+    private var languageBinding: Binding<AppLanguage> {
+        Binding(
+            get: { pendingLanguage ?? storedLanguage },
+            set: { pendingLanguage = ($0 == storedLanguage) ? nil : $0 }
+        )
+    }
+
+    private var restartConfirmationBinding: Binding<Bool> {
+        Binding(
+            get: { pendingLanguage != nil },
+            set: { if !$0 { pendingLanguage = nil } }
+        )
+    }
+
+    private func applyPendingLanguage() {
+        guard let language = pendingLanguage else { return }
+        pendingLanguage = nil
+        AppLanguagePreference.apply(language)
+        try? AppRelaunch.relaunch()
     }
 
     private var sentryConsentBinding: Binding<Bool> {
