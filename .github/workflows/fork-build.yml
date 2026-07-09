@@ -37,16 +37,16 @@ jobs:
       - name: Install create-dmg
         run: npm install --global create-dmg
 
+      - name: Use isolated bundle identifier
+        run: |
+          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier com.mux.app" Muxy/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleName Muxy (zh)" Muxy/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName Muxy (zh)" Muxy/Info.plist
+
       - name: Build unsigned app
         run: |
           chmod +x scripts/build-release.sh scripts/create-icns.sh
           scripts/build-release.sh --arch arm64 --version 0.0.0
-
-      - name: Use isolated bundle identifier
-        run: |
-          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier com.mux.app" build/Muxy.app/Contents/Info.plist
-          /usr/libexec/PlistBuddy -c "Set :CFBundleName Muxy (zh)" build/Muxy.app/Contents/Info.plist
-          /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName Muxy (zh)" build/Muxy.app/Contents/Info.plist
 
       - name: Ad-hoc sign for local launch
         run: codesign --force --deep --sign - build/Muxy.app
